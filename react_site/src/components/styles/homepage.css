@@ -1,0 +1,121 @@
+#body_homepage{
+    background-color: #F6F7FB;
+}
+
+#main_graph{
+    /* Main Background */
+    position: absolute;
+    width: 1188px;
+    height: 836px;
+    left: 252px;
+    top: 64px;
+    background: #EEF1FA;
+    border-radius: 80px 0px 0px 80px;
+}
+
+#symbol{
+    /* olympic-rings-denver-fact-colorado-hates-the-olympic-games-the-4 2 */
+
+    position: absolute;
+    width: 393px;
+    height: 210px;
+    left: 398px;
+    top: 245px;
+}
+
+#title{
+    /* Project Name */
+
+    position: absolute;
+    width: 523px;
+    height: 84px;
+    left: 333px;
+    top: 455px;
+
+    font-family: 'Cabin';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 80px;
+    line-height: 97px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.05em;
+
+    color: #000000;
+}
+   
+#cadeira{ 
+    /* Advanced Data Visualization */
+    position: absolute;
+    width: 231px;
+    height: 75px;
+    left: 0px;
+    top: 0px;
+
+    font-family: 'Cabin';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.05em;
+
+    color: #000000;
+}
+
+#authors{
+    /* Authors */
+
+    position: absolute;
+    width: 70px;
+    height: 29px;
+    left: 79px;
+    top: 87px;
+
+    font-family: 'Cabin';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.05em;
+
+    color: #000000;
+}
+
+#sg1{
+    /* Rectangle 9 */
+
+    position: absolute;
+    width: 196px;
+    height: 118px;
+    left: 25px;
+    top: 146px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+}
+
+#made{
+    /* Made by */
+    position: absolute;
+    height: 17px;
+    left: 13px;
+    top: 11px;
+
+    font-family: 'Cabin';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
