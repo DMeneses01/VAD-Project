@@ -5,8 +5,8 @@
 #main_graph{
     /* Main Background */
     position: absolute;
-    width: 1188px;
-    height: 836px;
+    width: 1015px;
+    height: 500px;
     left: 252px;
     top: 64px;
     background: #EEF1FA;
@@ -19,8 +19,10 @@
     position: absolute;
     width: 393px;
     height: 210px;
-    left: 398px;
-    top: 245px;
+    left: 380px;
+    top: 150px;
+    width: 30%;
+    height: 30%;
 }
 
 #title{
@@ -30,12 +32,12 @@
     width: 523px;
     height: 84px;
     left: 333px;
-    top: 455px;
+    top: 310px;
 
     font-family: 'Cabin';
     font-style: normal;
     font-weight: 700;
-    font-size: 80px;
+    font-size: 60px;
     line-height: 97px;
     display: flex;
     align-items: center;
