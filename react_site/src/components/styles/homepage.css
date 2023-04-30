@@ -5,12 +5,12 @@
 #main_graph{
     /* Main Background */
     position: absolute;
-    width: 1015px;
-    height: 500px;
-    left: 252px;
-    top: 64px;
+    width: 74vw;
+    height: 88vh;
+    left: 57vh;
+    top: 11vh;
     background: #EEF1FA;
-    border-radius: 80px 0px 0px 80px;
+    border-radius: 14vh 0vh 0vh 14vh;
 }
 
 #symbol{
@@ -74,7 +74,7 @@
     position: absolute;
     width: 70px;
     height: 29px;
-    left: 79px;
+    left: 110px;
     top: 87px;
 
     font-family: 'Cabin';
@@ -94,7 +94,7 @@
     /* Rectangle 9 */
 
     position: absolute;
-    width: 196px;
+    width: 250px;
     height: 118px;
     left: 25px;
     top: 146px;
