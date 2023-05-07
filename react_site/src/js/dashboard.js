@@ -8,7 +8,9 @@ export const Dashboard = () => {
 
     return (
         <div id='body_dashboard'>
-           
+           <div id='main_graph'> 
+                
+            </div>
 
 
         </div>

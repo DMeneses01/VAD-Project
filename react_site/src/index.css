@@ -5,7 +5,3 @@ body{
     padding:0;
     font-family: 'Cabin';
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

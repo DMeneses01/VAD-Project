@@ -1,8 +1,8 @@
-#body_homepage{
+body{
     background-color: #F6F7FB;
 }
 
-#main_graph{
+.main_graph{
     /* Main Background */
     position: absolute;
     width: 74vw;
@@ -13,7 +13,7 @@
     border-radius: 14vh 0vh 0vh 14vh;
 }
 
-#symbol{
+.symbol{
     /* olympic-rings-denver-fact-colorado-hates-the-olympic-games-the-4 2 */
 
     position: absolute;
@@ -23,7 +23,7 @@
     height: 30%;
 }
 
-#title{
+.title{
     /* Project Name */
 
     position: absolute;
@@ -44,29 +44,8 @@
 
     color: #000000;
 }
-   
-#cadeira{ 
-    /* Advanced Data Visualization */
-    position: absolute;
-    width: 16.04vw;
-    height: 8.33vh;
-    left: 48px;
-    top: 2vh;
 
-    font-family: 'Cabin';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 4vh;
-    line-height: 4.5vh;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.05em;
-
-    color: #000000;
-}
-
-#authors{
+.authors{
     /* Authors */
 
     position: absolute;
@@ -88,7 +67,7 @@
     color: #000000;
 }
 
-#sg1{
+.sg1{
     /* Rectangle 9 */
 
     position: absolute;
@@ -101,7 +80,7 @@
     border-radius: 12px;
 }
 
-#made{
+.made{
     /* Made by */
     position: absolute;
     height: 2vh;
@@ -117,7 +96,7 @@
     color: #000000;
 }
 
-#name{
+.name{
     
     position: absolute;
     height: 2vh;
@@ -133,7 +112,7 @@
     color: #000000;
 }
 
-#number{
+.number{
     position: absolute;
     height: 2vh;
     left: 11vw;
@@ -149,7 +128,7 @@
     color: #000000;
 }
 
-#sg2{
+.sg2{
     /* Rectangle 9 */
     position: absolute;
     width: 18vw;
@@ -162,7 +141,7 @@
 
 }
 
-#profile{
+.profile{
     /* Profile */
 
 
@@ -181,7 +160,7 @@
     color: #000000;
 }
 
-#git{
+.git{
     position: absolute;
     width: 3vw;
     height: 6.5vh;
@@ -189,7 +168,7 @@
     top: 10vh;
 }
 
-#front_button{
+.front_button{
     position: absolute;
     width: 10vw;
     height: 5vh;
@@ -201,7 +180,7 @@
     border-radius: 7px;
 }
 
-#buttonNext{
+.buttonNext{
 
     position: absolute;
     width: 3vw;
@@ -220,7 +199,7 @@
     letter-spacing: 0.05em;
 }
 
-#seta{
+.seta{
     position: absolute;
     width: 3vw;
     height: 6.5vh;

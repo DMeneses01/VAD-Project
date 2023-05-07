@@ -1,0 +1,14 @@
+#body_homepage{
+    background-color: #F6F7FB;
+}
+
+#main_graph{
+    /* Main Background */
+    position: absolute;
+    width: 74vw;
+    height: 88vh;
+    left: 26vw;
+    top: 11vh;
+    background: #EEF1FA;
+    border-radius: 14vh 0vh 0vh 14vh;
+}
