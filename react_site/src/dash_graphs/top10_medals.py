@@ -1,8 +1,3 @@
-import dash
-from dash import Dash, html, dcc, callback, Output, Input
-import plotly.express as px
-import os
-
 import pandas as pd
 import plotly.express as px
 
@@ -89,52 +84,15 @@ fig = px.bar(medals, x="country", y="count", color='medal',
              color_discrete_map={
                 'Gold': '#D6AF36',
                 'Silver': '#A7A7AD',
-                'Bronze': '#A77044'}, width=300, height=600).update_xaxes(categoryorder="total descending").update_layout(font_family= 'Cabin', margin={'t':5, 'b':5, 'r': 3, 'l': 3})
+                'Bronze': '#A77044'}, width=1200, height=900).update_xaxes(categoryorder="total descending").update_layout(font_family= 'Cabin', margin={'t':5, 'b':5, 'r': 3, 'l': 3})
+
+app.layout = html.Div(style={'font-family': text['font_family']}, children = [
+    html.H4('Top 10 Medals by Country'),
+    dcc.Graph(id="graph", figure=fig),
+    
+])
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
 
 
-dash.register_page(__name__, path='/dashboard')
-
-layout = html.Div(
-    [
-	    
-        html.Div([
-                ], 
-                    style = {'position': 'absolute', 'width': '72vw','height': '88vh', 'left': '26vw', 'top': '11vh', 'background': '#EEF1FA', 'borderRadius': '14vh 0vh 0vh 14vh'}),
-		html.Div(
-                [
-                    html.Div(
-                        [
-                            html.Div(
-                                dcc.Link(
-                                    f"{'By country'}", href=page["relative_path"]
-                                ), style={'position': 'absolute', 'width': '10vw', 'height':'6.5vh', 'left': '2vw', 'top':'-0.9vh',
-                                        'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontWeight': '500', 'fontSize': '2.6vh',
-                                        'lineHeight': '1.89vh', 'display': 'flex', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing': '0.05em'}
-                            )
-                            for page in dash.page_registry.values()
-                            if page["path"] == "/by_country"
-                        ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '70vw', 'top': '3vh',
-                                    'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '7px'}
-				    ), 
-				    #html.Img(src='/assets/round-chevron-right.svg')    
-                      
-                ]
-        ),
-	
-        html.Div([
-                html.H1('Jogos Olímpicos à Lupa', style={'position': 'absolute', 'width': '30vw', 'height': '3.22vh', 'left': '4vw', 'top': '1vh',
-                            'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontSize': '3vh', 'lineHeight': '2.44vh', 'display': 'flex', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing':' 0.05em'}),
-                html.Div(children = [
-                    html.H4('Top 10 Medals by Country'),
-                    dcc.Graph(id="graph", figure=fig),    
-                ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 'position': 'absolute',
-                        'width': '18vw', 'height': '87vh', 'left': '3.5vw', 'top': '11vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'})
-            ]),
-                    
-        html.Div(
-            style={
-                'backgroundColor': '#F6F7FB',
-                'height': '98vh'}
-		)
-    ]
-)
