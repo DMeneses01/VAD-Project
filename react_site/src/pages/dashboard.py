@@ -33,7 +33,7 @@ heatmap = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','heat
 fig2 = px.choropleth(heatmap, geojson=countries, locations='country', locationmode='country names', color='total',
                            color_continuous_scale='viridis',
                            range_color=(0, max(heatmap["total"])),
-                           labels={'total':'medals'},  width=1150, height=500
+                           labels={'total':'medals'},  width=1150, height=550
                           )
 fig2.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, paper_bgcolor="#EEF1FA", font_family= 'Cabin')
 
@@ -45,10 +45,10 @@ layout = html.Div(
 	    
         html.Div(children=[
                 html.Div(children = [
-                    html.H4('Top 10 Medals by Country', style={'position': 'absolute', 'left': '3.5vw'}),
-                    dcc.Graph(id="graph", figure=fig2, style={'position': 'absolute', 'left': '3vw', 'top': '5vh',}),
+                    html.H4('Top 10 Medals by Country', style={'position': 'absolute', 'left': '3.5vw', 'position': 'absolute', 'fontFamily': text['font_family'], 'width': '30vw','height': '5vh', 'background': '#EEF1FA'}),
+                    dcc.Graph(id="graph", figure=fig2, style={'position': 'absolute', 'left': '3vw', 'top': '10vh','position': 'absolute', 'background': '#EEF1FA'}),
                     
-                ], style = {'position': 'absolute', 'fontFamily': text['font_family'], 'width': '72vw','height': '88vh', 'background': '#EEF1FA'})
+                ])
         ], style = {'position': 'absolute', 'width': '72vw','height': '88vh', 'left': '26vw', 'top': '11vh', 'background': '#EEF1FA', 'borderRadius': '14vh 0vh 0vh 14vh'}),
 		
         html.Div([
