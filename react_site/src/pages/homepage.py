@@ -2,7 +2,16 @@ import dash
 from dash import Dash, html, dcc, callback, Output, Input
 import plotly.express as px
 import os
+import PIL
 
+image_path = os.path.abspath('react_site/src/pages/components/olympic-rings.png')
+pil_rings = PIL.Image.open(image_path)
+
+image_path = os.path.abspath('react_site/src/pages/components/git.png')
+pil_git = PIL.Image.open(image_path)
+
+image_path = os.path.abspath('react_site/src/pages/components/round-chevron-right.png')
+pil_seta = PIL.Image.open(image_path)
 
 dash.register_page(__name__, path='/') 
 
@@ -15,8 +24,8 @@ layout = html.Div(
                             'color': '#000000', 'backgroundColor': '#F6F7FB'}),
 			    
         html.Div([
-                    #html.Img(src=pil__rings,  
-                            #style={'position': 'absolute', 'left': '26.39vw', 'top': '25vh', 'width': '30%', 'height': '30%'}),
+                    html.Img(src=pil_rings,  
+                            style={'position': 'absolute', 'left': '23vw', 'top': '20vh', 'width': '40%', 'height': '40%'}),
                     html.H1('Jogos Olímpicos à lupa', 
 			                style={'position': 'absolute', 'width': '60vw', 'height': '9.33vh', 'left': '13vw', 'top': '55vh',
                                     'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontWeight': '700', 'fontSize': '10vh', 'lineHeight': '10vh', 
@@ -39,7 +48,7 @@ layout = html.Div(
                         ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '7.5vw', 'top': '90vh',
                                     'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '7px'}
 				    ), 
-				    #html.Img(src='/assets/round-chevron-right.svg')     
+				    html.Img(src=pil_seta, style={'position': 'absolute', 'width': '2vw', 'height': '3.5vh', 'left': '15vw', 'top': '90.7vh'})     
                 ]
         ),
 	
@@ -58,10 +67,10 @@ layout = html.Div(
                 ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
 			        'position': 'absolute', 'width': '18vw', 'height': '20vh', 'left': '3.5vw', 'top':' 23vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
                 html.Div([
-                    html.Img(src='../components/git.png', style={'position': 'absolute', 'width': '3vw', 'height': '6.5vh', 'left': '4vw', 'top': '10vh'}),
-                    html.H2('GitHub', style={'position':'absolute', 'width': '20vw', 'height': '2vh', 'left': '8vw', 'top': '12.5vh', 'fontSize': '2.6vh'}),
-                    html.A('@DMeneses01', href='https://github.com/DMeneses01', style={'position':'absolute','width': '20vw', 'height': '2vh', 'left': '5vw', 'top': '21vh'}),
-                    html.A('@patii01', href='https://github.com/patii01', style={'position':'absolute','width': '20vw', 'height': '2vh', 'left': '7vw', 'top': '27vh'})
+                    html.Img(src=pil_git, style={'position': 'absolute', 'width': '3vw', 'height': '6.5vh', 'left': '5vw', 'top': '7vh'}),
+                    html.H1('GitHub', style={'position':'absolute', 'width': '20vw', 'height': '2vh', 'left': '9vw', 'top': '7vh', 'fontSize': '2.6vh'}),
+                    html.A('@DMeneses01', href='https://github.com/DMeneses01', style={'position':'absolute','width': '20vw', 'height': '2vh', 'left': '5.5vw', 'top': '19vh', 'fontSize': '2.6vh'}),
+                    html.A('@patii01', href='https://github.com/patii01', style={'position':'absolute','width': '20vw', 'height': '2vh', 'left': '7vw', 'top': '25vh', 'fontSize': '2.6vh'})
                 ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 'position': 'absolute',
                         'width': '18vw', 'height': '35vh', 'left': '3.5vw', 'top': '50vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
             ]),
