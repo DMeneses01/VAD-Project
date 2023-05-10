@@ -3,7 +3,6 @@ import dash
 import dash_bootstrap_components as dbc
 app = Dash(__name__, use_pages=True)
 
-
 app.layout = html.Div(
 	[
 		

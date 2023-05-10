@@ -15,8 +15,8 @@ layout = html.Div(
                             'color': '#000000', 'backgroundColor': '#F6F7FB'}),
 			    
         html.Div([
-                    html.Img(src='/assets/olympic-rings.png',  
-                            style={'position': 'absolute', 'left': '26.39vw', 'top': '25vh', 'width': '30%', 'height': '30%'}),
+                    #html.Img(src=pil__rings,  
+                            #style={'position': 'absolute', 'left': '26.39vw', 'top': '25vh', 'width': '30%', 'height': '30%'}),
                     html.H1('Jogos Olímpicos à lupa', 
 			                style={'position': 'absolute', 'width': '60vw', 'height': '9.33vh', 'left': '13vw', 'top': '55vh',
                                     'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontWeight': '700', 'fontSize': '10vh', 'lineHeight': '10vh', 
@@ -58,7 +58,7 @@ layout = html.Div(
                 ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
 			        'position': 'absolute', 'width': '18vw', 'height': '20vh', 'left': '3.5vw', 'top':' 23vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
                 html.Div([
-                    html.Img(src='/assets/github.png', style={'position': 'absolute', 'width': '3vw', 'height': '6.5vh', 'left': '4vw', 'top': '10vh'}),
+                    html.Img(src='../components/git.png', style={'position': 'absolute', 'width': '3vw', 'height': '6.5vh', 'left': '4vw', 'top': '10vh'}),
                     html.H2('GitHub', style={'position':'absolute', 'width': '20vw', 'height': '2vh', 'left': '8vw', 'top': '12.5vh', 'fontSize': '2.6vh'}),
                     html.A('@DMeneses01', href='https://github.com/DMeneses01', style={'position':'absolute','width': '20vw', 'height': '2vh', 'left': '5vw', 'top': '21vh'}),
                     html.A('@patii01', href='https://github.com/patii01', style={'position':'absolute','width': '20vw', 'height': '2vh', 'left': '7vw', 'top': '27vh'})

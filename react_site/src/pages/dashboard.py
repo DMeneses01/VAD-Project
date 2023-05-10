@@ -45,7 +45,7 @@ layout = html.Div(
 	    
         html.Div(children=[
                 html.Div(children = [
-                    html.H4('Top 10 Medals by Country', style={'position': 'absolute', 'left': '3.5vw', 'position': 'absolute', 'fontFamily': text['font_family'], 'width': '30vw','height': '5vh', 'background': '#EEF1FA'}),
+                    html.H4('Medals by Country', style={'position': 'absolute', 'left': '3.5vw', 'position': 'absolute', 'fontSize': '25px', 'fontFamily': text['font_family'], 'width': '30vw','height': '5vh', 'left':'27vw', 'background': '#EEF1FA'}),
                     dcc.Graph(id="graph", figure=fig2, style={'position': 'absolute', 'left': '3vw', 'top': '10vh','position': 'absolute', 'background': '#EEF1FA'}),
                     
                 ])
@@ -57,16 +57,30 @@ layout = html.Div(
                             html.Div(
                                 dcc.Link(
                                     f"{'By country'}", href=page["relative_path"]
-                                ), style={'position': 'absolute', 'width': '10vw', 'height':'6.5vh', 'left': '2vw', 'top':'-0.9vh',
+                                ), style={'position': 'absolute', 'width': '10vw', 'height':'6.5vh', 'left': '1.5vw', 'top':'-0.9vh',
                                         'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontWeight': '500', 'fontSize': '2.6vh',
                                         'lineHeight': '1.89vh', 'display': 'flex', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing': '0.05em'}
                             )
                             for page in dash.page_registry.values()
                             if page["path"] == "/by_country"
-                        ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '70vw', 'top': '3vh',
+                        ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '74vw', 'top': '3vh',
                                     'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '7px'}
 				    ), 
-				    #html.Img(src='/assets/round-chevron-right.svg')         
+				    #html.Img(src='/assets/round-chevron-right.svg')  
+                    html.Div(
+                        [
+                            html.Div(
+                                dcc.Link(
+                                    f"{'By sport'}", href=page["relative_path"]
+                                ), style={'position': 'absolute', 'width': '10vw', 'height':'6.5vh', 'left': '3vw', 'top':'-0.9vh',
+                                        'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontWeight': '500', 'fontSize': '2.6vh',
+                                        'lineHeight': '1.89vh', 'display': 'flex', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing': '0.05em'}
+                            )
+                            for page in dash.page_registry.values()
+                            if page["path"] == "/by_sport"
+                        ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '86vw', 'top': '3vh',
+                                    'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '7px'}
+				    ),        
                 ]
         ),
 	
