@@ -8,17 +8,27 @@ from dash import Dash
 import os
 
 app = Dash(__name__)
-countries = gpd.read_file(os.path.join(os.getcwd(), 'Dataset', 'countries.geojson'))
 
 
-games_Medal = pd.read_csv(os.path.join(os.getcwd(), 'Dataset', 'Olympic_Games_Medal_Tally.csv'), sep=',', encoding_errors='replace')
+countries = gpd.read_file(os.path.join(os.path.dirname(os.getcwd()), 'Dataset', 'countries.geojson'))
+
+
+games_Medal = pd.read_csv(os.path.join(os.path.dirname(os.getcwd()), 'Dataset', 'Olympic_Games_Medal_Tally.csv'), sep=',', encoding_errors='replace')
 games_Medal = games_Medal.replace(["na"], None)
 
 games_Medal = games_Medal[games_Medal["edition"].str.contains("Winter") == False]
 
 df = pd.DataFrame(games_Medal["country"].unique(), columns=["country"])
 
-total = games_Medal.groupby('country')['total'].sum()
+gold = games_Medal.groupby('country')['gold'].sum()
+silver = games_Medal.groupby('country')['silver'].sum()
+bronze = games_Medal.groupby('country')['bronze'].sum()
+
+total1 = gold.add(silver, fill_value=0)
+total1 = total1.add(bronze, fill_value=0)
+
+total = pd.DataFrame(columns=['total'])
+total['total'] = total1
 
 df = pd.merge(df, total, on='country', how='left')
 
@@ -48,8 +58,7 @@ df = df[df["country"].str.contains("Hong Kong, China")==False]
 df.loc[df['country'] == "Russian Federation", ['total']] += df.loc[df['country'] == "ROC", ['total']].values[0][0]
 df = df[df["country"].str.contains("ROC")==False]
 
-
-Path = os.getcwd()
+Path = os.path.dirname(os.getcwd())
 df.to_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','heatmap.csv'), index=False)
 
 
@@ -62,7 +71,7 @@ text = {
 }
 
 fig = px.choropleth(df, geojson=countries, locations='country', locationmode='country names', color='total',
-                           color_continuous_scale='viridis',
+                           color_continuous_scale='sunsetdark',
                            range_color=(0, max(df["total"])),
                            labels={'total':'medals'}
                           )
@@ -74,6 +83,8 @@ app.layout = html.Div(style={'font-family': text['font_family']}, children = [
     dcc.Graph(id="graph", figure=fig),
     
 ])
+
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
