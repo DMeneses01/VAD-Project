@@ -31,7 +31,7 @@ layout = html.Div(
                                     'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontWeight': '700', 'fontSize': '10vh', 'lineHeight': '10vh', 
 				                    'display': 'flex', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing': '0.05em', 'color': '#000000'} )
                     ], 
-                    style = {'position': 'absolute', 'width': '72vw','height': '88vh', 'left': '26vw', 'top': '11vh', 'background': '#EEF1FA', 'borderRadius': '14vh 0vh 0vh 14vh'}),
+                    style = {'position': 'absolute', 'width': '72vw','height': '88vh', 'left': '26vw', 'top': '11vh', 'background': '#EEF1FA', 'borderRadius': '12px 0vh 0vh 12px'}),
 		html.Div(
                 [
                     html.Div(
@@ -46,7 +46,7 @@ layout = html.Div(
                             for page in dash.page_registry.values()
                             if page["path"] == "/dashboard"
                         ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '7.5vw', 'top': '90vh',
-                                    'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '7px'}
+                                    'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '12px'}
 				    ), 
 				    html.Img(src=pil_seta, style={'position': 'absolute', 'width': '2vw', 'height': '3.5vh', 'left': '15vw', 'top': '90.7vh'})     
                 ]

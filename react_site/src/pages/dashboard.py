@@ -5,24 +5,26 @@ import os
 import pandas as pd
 import geopandas as gpd
 
+import PIL
+
+image_path = os.path.abspath('react_site/src/pages/components/olympic-rings.png')
+pil_rings = PIL.Image.open(image_path)
+
+image_path = os.path.abspath('react_site/src/pages/components/round-chevron-right.png')
+pil_seta = PIL.Image.open(image_path)
+
 app = Dash(__name__)
 
 Path = os.getcwd()
 medals = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','top10_medals.csv'))
 
 colors = ['#D6AF36', '#A7A7AD', '#A77044']
-colors = {
-    'background': '#EEF1FA'
-}
-text = {
-    'font_family': 'Cabin'
-}
 
 fig1 = px.bar(medals, x="country", y="count", color='medal', 
              color_discrete_map={
-                'Gold': '#D6AF36',
-                'Silver': '#A7A7AD',
-                'Bronze': '#A77044'}, width=300, height=600)
+                'Gold': colors[0],
+                'Silver': colors[1],
+                'Bronze': colors[2]}, width=300, height=600)
 
 fig1.update_xaxes(categoryorder="total descending")
 fig1.update_layout(font_family= 'Cabin', margin={'t':5, 'b':5, 'r': 3, 'l': 3})
@@ -45,11 +47,11 @@ layout = html.Div(
 	    
         html.Div(children=[
                 html.Div(children = [
-                    html.H4('Medals by Country', style={'position': 'absolute', 'left': '3.5vw', 'position': 'absolute', 'fontSize': '25px', 'fontFamily': text['font_family'], 'width': '30vw','height': '5vh', 'left':'27vw', 'background': '#EEF1FA'}),
+                    html.H4('Medals by Country', style={'position': 'absolute', 'left': '3.5vw', 'position': 'absolute', 'fontSize': '25px', 'fontFamily': 'Cabin', 'width': '30vw','height': '5vh', 'left':'27vw', 'background': '#EEF1FA'}),
                     dcc.Graph(id="graph", figure=fig2, style={'position': 'absolute', 'left': '3vw', 'top': '10vh','position': 'absolute', 'background': '#EEF1FA'}),
                     
                 ])
-        ], style = {'position': 'absolute', 'width': '72vw','height': '88vh', 'left': '26vw', 'top': '11vh', 'background': '#EEF1FA', 'borderRadius': '14vh 0vh 0vh 14vh'}),
+        ], style = {'position': 'absolute', 'width': '72vw','height': '88vh', 'left': '26vw', 'top': '11vh', 'background': '#EEF1FA', 'borderRadius': '12px 0px 0px 12px'}),
 		
         html.Div([
                     html.Div(
@@ -64,29 +66,31 @@ layout = html.Div(
                             for page in dash.page_registry.values()
                             if page["path"] == "/by_country"
                         ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '74vw', 'top': '3vh',
-                                    'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '7px'}
+                                    'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '12px'}
 				    ), 
-				    #html.Img(src='/assets/round-chevron-right.svg')  
+				    html.Img(src=pil_seta, style={'position': 'absolute', 'width': '2vw', 'height': '3.5vh', 'left': '82vw', 'top': '3.8vh'}), 
                     html.Div(
                         [
                             html.Div(
                                 dcc.Link(
                                     f"{'By sport'}", href=page["relative_path"]
-                                ), style={'position': 'absolute', 'width': '10vw', 'height':'6.5vh', 'left': '3vw', 'top':'-0.9vh',
+                                ), style={'position': 'absolute', 'width': '10vw', 'height':'6.5vh', 'left': '2vw', 'top':'-0.9vh',
                                         'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontWeight': '500', 'fontSize': '2.6vh',
                                         'lineHeight': '1.89vh', 'display': 'flex', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing': '0.05em'}
                             )
                             for page in dash.page_registry.values()
                             if page["path"] == "/by_sport"
-                        ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '86vw', 'top': '3vh',
-                                    'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '7px'}
-				    ),        
+                        ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '85vw', 'top': '3vh',
+                                    'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '12px'}
+				    ),
+                    html.Img(src=pil_seta, style={'position': 'absolute', 'width': '2vw', 'height': '3.5vh', 'left': '93vw', 'top': '3.8vh'}),        
                 ]
         ),
 	
         html.Div([
-                html.H1('Jogos Olímpicos à Lupa', style={'position': 'absolute', 'width': '30vw', 'height': '3.22vh', 'left': '4vw', 'top': '1vh',
+                html.H1('Jogos Olímpicos à Lupa', style={'position': 'absolute', 'width': '30vw', 'height': '3.22vh', 'left': '4vw', 'top': '2vh',
                             'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontSize': '3vh', 'lineHeight': '2.44vh', 'display': 'flex', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing':' 0.05em'}),
+                html.Img(src=pil_rings, style={'position': 'absolute', 'width': '3vw', 'height': '3.5vh', 'left': '0.5vw', 'top': '3.7vh'}),        
                 html.Div(children = [
                     html.H4('Top 10 Medals by Country', style={'position': 'absolute', 'left': '3.5vw'}),
                     dcc.Graph(id="graph", figure=fig1, style={'position': 'absolute', 'left': '0.2vw', 'top': '7vh'}),    
