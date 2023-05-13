@@ -3,6 +3,7 @@ from dash import Dash, html, dcc, callback, Output, Input
 import plotly.express as px
 import os
 import pandas as pd
+import plotly.graph_objects as go
 
 import PIL
 
@@ -35,11 +36,16 @@ layout = html.Div(
             ],
                 value='Portugal',
                 clearable=False,
-                style={'width': '50%'}
+                style={'width': '18vw', 'height':'3vh', 'fontSize':'2.5vh'}
             ),
-            html.H4('Top 10 Medals by Country'),
-            #dcc.Graph(id="graph")
-        ],  style= {'fontFamily': 'Cabin'}),
+        ],  style= {'position':'absolute', 'fontFamily': 'Cabin', 'top':'11vh', 'left':'3.5vw'}),
+
+        html.Div([
+            dcc.Graph(id="graph", style={'position': 'absolute','top':' 1vh', 'left':'0.1vw'})
+        
+        ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
+            'position': 'absolute', 'width': '18vw', 'height': '24.5vh', 'left': '3.5vw', 'top':' 19vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
+        
 	
         html.Div([
                 html.H1("By country", style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '89vw', 'top': '2vh', 'fontFamily': 'Cabin', 'fontSize':'2.5vh'}),
@@ -67,3 +73,28 @@ layout = html.Div(
 		)
     ]
 )
+
+@callback(
+Output("graph", "figure"),
+[Input("dropdown", "value")])
+def medals_type(country):
+
+    goldv = medals.loc[(medals['country'] == country), 'gold'].values[0]
+    silverv = medals.loc[(medals['country'] == country), 'silver'].values[0]
+    bronzev = medals.loc[(medals['country'] == country), 'bronze'].values[0]
+
+    fig1 = go.Figure(data=[go.Pie(labels=['Gold','Silver','Bronze'],
+                                values=[goldv,silverv,bronzev])])                       
+    fig1.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
+                    marker=dict(colors=colors, line=dict(color='#000000', width=1)))
+    fig1.update_layout(font_family= 'Cabin',autosize = False, width = 300, height = 172, 
+                      legend=dict(yanchor="top", xanchor="left", font=dict(size=15)),
+                      margin=dict(l=2, r=2, b=20, t=31, pad=0),
+                      title={
+                        'text': "<b>Medals</b>",
+                        'y':0.9,
+                        'x':0.15,
+                        'xanchor': 'center',
+                        'yanchor': 'top'})
+
+    return fig1
