@@ -16,9 +16,12 @@ pil_seta = PIL.Image.open(image_path)
 Path = os.getcwd()
 medals = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','medals_country.csv'))
 
+top_sports = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','top5_sports_country.csv'))
+
 countries = medals['country'].drop_duplicates().sort_values()
 
 colors = ['#D6AF36', '#A7A7AD', '#A77044']
+color = ['#0081C8', '#FCB131', '#000000', '#00A651', '#EE334E']
 
 dash.register_page(__name__, path='/by_country')
 
@@ -27,7 +30,7 @@ layout = html.Div(
 	    
         html.Div(children=[
                 
-        ], style = {'position': 'absolute', 'width': '72vw','height': '88vh', 'left': '26vw', 'top': '11vh', 'background': '#EEF1FA', 'borderRadius': '12px 0vh 0vh 12px'}),
+        ], style = {'position': 'absolute', 'width': '68.5vw','height': '75vh', 'left': '26vw', 'top': '11vh', 'background': '#EEF1FA', 'borderRadius': '12px 12px 12px 12px', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)'}),
 		
         html.Div(children = [
             dcc.Dropdown(id="dropdown",
@@ -41,10 +44,21 @@ layout = html.Div(
         ],  style= {'position':'absolute', 'fontFamily': 'Cabin', 'top':'11vh', 'left':'3.5vw'}),
 
         html.Div([
-            dcc.Graph(id="graph", style={'position': 'absolute','top':' 1vh', 'left':'0.1vw'})
+            dcc.Graph(id="graph1", style={'position': 'absolute','top':' 1vh', 'left':'0.1vw'})
         
         ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
-            'position': 'absolute', 'width': '18vw', 'height': '24.5vh', 'left': '3.5vw', 'top':' 19vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
+            'position': 'absolute', 'width': '18vw', 'height': '24.5vh', 'left': '3.5vw', 'top':' 19.5vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
+        
+        html.Div([
+            dcc.Graph(id="graph2", style={'position': 'absolute','top':' 3vh', 'left':'0.1vw'})
+        
+        ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
+            'position': 'absolute', 'width': '18vw', 'height': '38vh', 'left': '3.5vw', 'top':' 48vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
+        
+        html.Div([
+           
+        ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
+            'position': 'absolute', 'width': '91.1vw', 'height': '38vh', 'left': '3.5vw', 'top':' 90vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
         
 	
         html.Div([
@@ -69,15 +83,18 @@ layout = html.Div(
         html.Div(
             style={
                 'backgroundColor': '#F6F7FB',
-                'height': '98vh'}
+                'height': '127.5vh'}
 		)
     ]
 )
 
 @callback(
-Output("graph", "figure"),
-[Input("dropdown", "value")])
+Output("graph1", "figure"),
+Output("graph2", "figure"),
+Input("dropdown", "value"))
 def medals_type(country):
+
+    ## Medals
 
     goldv = medals.loc[(medals['country'] == country), 'gold'].values[0]
     silverv = medals.loc[(medals['country'] == country), 'silver'].values[0]
@@ -96,5 +113,33 @@ def medals_type(country):
                         'x':0.15,
                         'xanchor': 'center',
                         'yanchor': 'top'})
+    
+    ## Top 5 sports
 
-    return fig1
+    dataset = top_sports[top_sports['country'] == country].reset_index()
+
+    new_medal = []
+    for i in range(len(dataset)):
+        edition = dataset.loc[i, 'edition']
+        sport = dataset.loc[i, 'sport']
+        event = dataset.loc[i, 'event']
+
+        new_medal.append(dataset[(dataset['edition'] <= edition) & (dataset['sport'] == sport) & (dataset['event'] == event)]['medal'].sum())
+
+    dataset['medal'] = new_medal
+
+    dataset2 = dataset.copy()
+
+    dataset2 = pd.DataFrame(dataset2.groupby(['sport']).sum()).reset_index()
+
+    dataset2 = dataset2.sort_values(by=['medal'], ascending=False).head(5)
+
+    dataset2['color'] = color
+
+    fig2 = px.bar(dataset2, x="sport", y="medal", color= 'color', title="Top 5 sports for the country", width=300, height=250,
+                color_discrete_sequence=['#0081C8', '#FCB131', '#000000', '#00A651', '#EE334E'] )
+    fig2.update_layout(font_family= 'Cabin',autosize = False, 
+                        legend=dict(yanchor="top", xanchor="left", font=dict(size=15)),
+                        margin=dict(l=1, r=6, b=20, t=31, pad=0), showlegend=False,)
+
+    return fig1, fig2

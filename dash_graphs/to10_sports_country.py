@@ -8,62 +8,48 @@ import plotly.express as px
 from dash import Dash
 Path = os.getcwd()
 
-games_Medal = pd.read_csv(os.path.join(Path,'Dataset', 'Olympic_Games_Medal_Tally.csv'), sep=',')
-games_Medal = games_Medal.replace(["na"], None)
+athlete_Event_Results = pd.read_csv(os.path.join(Path,'Dataset', 'Olympic_Athlete_Event_Results.csv'), sep=',')
+country_n = pd.read_csv(os.path.join(Path,'Dataset', 'Olympics_Country.csv'), sep=',')
 
-games_Medal = games_Medal[games_Medal["edition"].str.contains("Winter") == False]   # apenas jogos de verao
+#merge on country_noc
 
-df = pd.DataFrame(games_Medal["country"].unique(), columns=["country"])
-
-gold = games_Medal.groupby('country')['gold'].sum()
-silver = games_Medal.groupby('country')['silver'].sum()
-bronze = games_Medal.groupby('country')['bronze'].sum()
-
-df = pd.merge(df, gold, on='country', how='left')
-df = pd.merge(df, silver, on='country', how='left')
-df = pd.merge(df, bronze, on='country', how='left')
+athlete_Event_Results = athlete_Event_Results.replace(["na"], None)
 
 
-# CLEANING DATA
+athlete_results = athlete_Event_Results[athlete_Event_Results["edition"].str.contains("Winter") == False]   # apenas jogos de verao
 
-df = df[df["country"].str.contains("Mixed team")==False] # Impossivel dividir
-df = df[df["country"].str.contains("Unified Team")==False] # Impossivel dividir
-df = df[df["country"].str.contains("Individual Olympic Athletes")==False] # Impossivel dividir
-df = df[df["country"].str.contains("Bohemia")==False]    # Eslováquia + Republica Checa
-df = df[df["country"].str.contains("Australasia")==False]    # Australia + Nova Zelandia + Nova Guine + partes da Indonesia
-df = df[df["country"].str.contains("Czechoslovakia")==False]    # Eslováquia + Republica Checa
-df = df[df["country"].str.contains("Yugoslavia")==False] # Bosnia + Croacia + Macedonia + Montenegro + Eslovenia + Servia
-df = df[df["country"].str.contains("Soviet Union")==False] # Russia + Letonia + Lituania + Estonia + Georgia + Armenia + Azerbaijao + Bielorrussia + Cazaquistao + Moldavia + Quirguistao + Tajiquistao + Turquemenistao + Ucrania + Usbequistao
-df = df[df["country"].str.contains("United Arab Republic")==False]  # Egypt + Syria + Faixa de Gaza
-df = df[df["country"].str.contains("West Indies Federation")==False] # Antigua + Barbados + Cayman Islands + Dominica + Grenada + Jamaica + Montserrat + St Christopher-Nevis-Anguilla + Saint Lucia	+ St Vincent and the Grenadines	+ Trinidad and Tobago + Turks and Caicos Islands	
+athlete_results = athlete_results.reset_index()
 
-df["country"] = df["country"].replace('Türkiye', 'Turkey')
+athlete_results = athlete_results.drop(columns=['result_id','athlete','athlete_id','pos'])
 
-df.loc[df['country'] == "Germany", ['gold']] += df.loc[df['country'] == "West Germany", ['gold']].values[0][0]
-df.loc[df['country'] == "Germany", ['gold']] += df.loc[df['country'] == "East Germany", ['gold']].values[0][0]
-df.loc[df['country'] == "Germany", ['silver']] += df.loc[df['country'] == "West Germany", ['silver']].values[0][0]
-df.loc[df['country'] == "Germany", ['silver']] += df.loc[df['country'] == "East Germany", ['silver']].values[0][0]
-df.loc[df['country'] == "Germany", ['bronze']] += df.loc[df['country'] == "West Germany", ['bronze']].values[0][0]
-df.loc[df['country'] == "Germany", ['bronze']] += df.loc[df['country'] == "East Germany", ['bronze']].values[0][0]
-df = df[df["country"].str.contains("West Germany")==False]
-df = df[df["country"].str.contains("East Germany")==False]
 
-df.loc[df['country'] == "People's Republic of China", ['gold']] += df.loc[df['country'] == "Hong Kong, China", ['gold']].values[0][0]
-df.loc[df['country'] == "People's Republic of China", ['silver']] += df.loc[df['country'] == "Hong Kong, China", ['silver']].values[0][0]
-df.loc[df['country'] == "People's Republic of China", ['bronze']] += df.loc[df['country'] == "Hong Kong, China", ['bronze']].values[0][0]
-df = df[df["country"].str.contains("Hong Kong, China")==False]
+repeat = []
+i=0
+while(i < len(athlete_results)):
+    if athlete_results.loc[i, 'isTeamSport'] == True:
+        auxi = i + 1 
+        p = athlete_results.loc[i, 'country_noc']
+        e = athlete_results.loc[i, 'event']
+        a = athlete_results.loc[i, 'edition_id']
+        while((athlete_results.loc[auxi, 'country_noc'] == p) and (athlete_results.loc[auxi, 'event'] == e) and (athlete_results.loc[auxi, 'edition_id'] == a)):
+            repeat.append(auxi)
+            auxi += 1
+        i = auxi-1
+    i+=1
 
-df.loc[df['country'] == "Russian Federation", ['gold']] += df.loc[df['country'] == "ROC", ['gold']].values[0][0]
-df.loc[df['country'] == "Russian Federation", ['silver']] += df.loc[df['country'] == "ROC", ['silver']].values[0][0]
-df.loc[df['country'] == "Russian Federation", ['bronze']] += df.loc[df['country'] == "ROC", ['bronze']].values[0][0]
-df = df[df["country"].str.contains("ROC")==False]
+athlete_results.drop(repeat, inplace=True)
+athlete_results.drop(columns=['edition_id', 'isTeamSport', 'index'], inplace=True)
+athlete_results['edition'] = athlete_results['edition'].str.split().str[0].astype(int)
 
-df.to_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','medals_country.csv'), index=False)
+athlete_results["medal"] = athlete_results["medal"].notnull().mul(1)
 
-countries = df['country'].drop_duplicates().sort_values()
+athlete_results = athlete_results.merge(country_n, on='country_noc', how='left')
 
-colors = ['#D6AF36', '#A7A7AD', '#A77044']
+gr = pd.DataFrame(athlete_results.groupby(['country', 'sport', 'edition', 'event']).sum()).reset_index()
 
+gr.to_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','top5_sports_country.csv'), index=False)
+
+countries = gr['country'].drop_duplicates().sort_values()
 
 app = Dash(__name__)
 
@@ -75,7 +61,7 @@ app.layout = html.Div(style={'font-family': 'Cabin'}, children = [
             value='Portugal',
             clearable=False,
         ),
-    html.H4('Top 10 Medals by Country'),
+    html.H4('Top 5 Sports'),
     dcc.Graph(id="graph"),
 ])
 
@@ -84,23 +70,36 @@ Output("graph", "figure"),
 [Input("dropdown", "value")])
 def medals_type(country):
 
-    goldv = df.loc[(df['country'] == country), 'gold'].values[0]
-    silverv = df.loc[(df['country'] == country), 'silver'].values[0]
-    bronzev = df.loc[(df['country'] == country), 'bronze'].values[0]
+    dataset = gr[gr['country'] == country].reset_index()
 
-    fig = go.Figure(data=[go.Pie(labels=['Gold','Silver','Bronze'],
-                                values=[goldv,silverv,bronzev])])                       
-    fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
-                    marker=dict(colors=colors, line=dict(color='#000000', width=1)))
-    fig.update_layout(font_family= 'Cabin',autosize = False, width = 300, height = 172, 
-                      legend=dict(yanchor="top", xanchor="left", font=dict(size=15)),
-                      margin=dict(l=1, r=2, b=20, t=31, pad=0),
-                      title={
-                        'text': "<b>Medals</b>",
-                        'y':0.9,
-                        'x':0.15,
-                        'xanchor': 'center',
-                        'yanchor': 'top'})
+    new_medal = []
+    for i in range(len(dataset)):
+        edition = dataset.loc[i, 'edition']
+        sport = dataset.loc[i, 'sport']
+        event = dataset.loc[i, 'event']
+
+        new_medal.append(dataset[(dataset['edition'] <= edition) & (dataset['sport'] == sport) & (dataset['event'] == event)]['medal'].sum())
+
+    sports = pd.unique(dataset.sport)
+
+    dataset['medal'] = new_medal
+
+    dataset2 = dataset.copy()
+
+    dataset2 = pd.DataFrame(dataset2.groupby(['sport']).sum()).reset_index()
+
+    dataset2 = dataset2.sort_values(by=['medal'], ascending=False)
+
+    dataset2 = dataset2.head(5)
+
+    color = ['#0081C8', '#FCB131', '#000000', '#00A651', '#EE334E']
+    dataset2['color'] = color
+
+    fig = px.bar(dataset2, x="sport", y="medal", color= 'color', title="Top 5 sports for the country", width=300, height=250,
+                color_discrete_sequence=['#0081C8', '#FCB131', '#000000', '#00A651', '#EE334E'] )
+    fig.update_layout(font_family= 'Cabin',autosize = False, 
+                        legend=dict(yanchor="top", xanchor="left", font=dict(size=15)),
+                        margin=dict(l=1, r=6, b=20, t=31, pad=0), showlegend=False,)
 
     return fig
 
