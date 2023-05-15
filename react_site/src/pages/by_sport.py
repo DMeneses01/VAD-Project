@@ -62,7 +62,7 @@ layout = html.Div(
         
 
         html.Div([
-           dcc.Graph(id="g1", style={'position': 'absolute','top':' 1.5vh', 'left':'0.5vw'})
+           dcc.Graph(id="g1", style={'position':'absolute', 'top':' 1.5vh', 'left':'0.5vw',  'width':'90vw', 'height':'35vh',})
         ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
             'position': 'absolute', 'width': '91.1vw', 'height': '38vh', 'left': '3.5vw', 'top':' 90vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
         
@@ -132,7 +132,6 @@ def sports_callback(sports):
     fig1 = go.Figure()
 
     fig1 = px.bar(df, x="year", y="count", color="gender", 
-                width=1520, height=265,
                 color_discrete_map={'Female': '#FCB131', 'Male': '#00A651'}, orientation='v')
 
 
