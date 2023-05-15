@@ -129,14 +129,32 @@ def sports_callback(sports):
     df["gender"] = gender
     df["count"] = count
 
+    df_male = df[df.gender == 'Male']
+    df_female = df[df.gender == 'Female']
+
+    df_female['count'] = - df_female['count']
+
     fig1 = go.Figure()
 
-    fig1 = px.bar(df, x="year", y="count", color="gender", 
-                color_discrete_map={'Female': '#FCB131', 'Male': '#00A651'}, orientation='v')
+    fig1.add_trace(go.Bar(
+        x = df_female.year,
+        y = df_female["count"],
+        name = 'Female',
 
+        marker_color='#FCB131'
+    ))
 
-    fig1.update_layout(font_family= 'Cabin',autosize = False, 
-                      title={
+    fig1.add_trace(go.Bar(
+            x = df_male.year,
+            y = df_male["count"],
+            name = 'Male',
+
+            marker_color='#00A651'
+    ))
+
+    fig1.update_layout(xaxis=dict(tickformat='(.0f'), barmode = 'relative',
+                       font_family= 'Cabin',autosize = False, 
+                    title={
                         'text': "<b>Men vs Women evolution</b>",
                         'xanchor': 'center',
                         'yanchor': 'top',

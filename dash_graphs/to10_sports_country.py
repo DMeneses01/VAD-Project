@@ -8,8 +8,8 @@ import plotly.express as px
 from dash import Dash
 Path = os.getcwd()
 
-athlete_Event_Results = pd.read_csv(os.path.join(Path,'Dataset', 'Olympic_Athlete_Event_Results.csv'), sep=',')
-country_n = pd.read_csv(os.path.join(Path,'Dataset', 'Olympics_Country.csv'), sep=',')
+athlete_Event_Results = pd.read_csv('../Dataset/Olympic_Athlete_Event_Results.csv', sep=',')
+country_n = pd.read_csv('../Dataset/Olympics_Country.csv', sep=',')
 
 #merge on country_noc
 
@@ -21,17 +21,6 @@ athlete_results = athlete_Event_Results[athlete_Event_Results["edition"].str.con
 athlete_results = athlete_results.reset_index()
 
 athlete_results = athlete_results.drop(columns=['result_id','athlete','athlete_id','pos'])
-
-athlete_results = athlete_results[athlete_results["country_noc"].str.contains("MIX")==False] # Impossivel dividir
-athlete_results = athlete_results[athlete_results["country_noc"].str.contains("EUN")==False] # Impossivel dividir
-athlete_results = athlete_results[athlete_results["country_noc"].str.contains("IOA")==False] # Impossivel dividir
-athlete_results = athlete_results[athlete_results["country_noc"].str.contains("BOH")==False]    # Eslováquia + Republica Checa
-athlete_results = athlete_results[athlete_results["country_noc"].str.contains("ANZ")==False]    # Australia + Nova Zelandia + Nova Guine + partes da Indonesia
-athlete_results = athlete_results[athlete_results["country_noc"].str.contains("TCH")==False]    # Eslováquia + Republica Checa
-athlete_results = athlete_results[athlete_results["country_noc"].str.contains("YUG")==False] # Bosnia + Croacia + Macedonia + Montenegro + Eslovenia + Servia
-athlete_results = athlete_results[athlete_results["country_noc"].str.contains("URS")==False] # Russia + Letonia + Lituania + Estonia + Georgia + Armenia + Azerbaijao + Bielorrussia + Cazaquistao + Moldavia + Quirguistao + Tajiquistao + Turquemenistao + Ucrania + Usbequistao
-athlete_results = athlete_results[athlete_results["country_noc"].str.contains("UAR")==False]  # Egypt + Syria + Faixa de Gaza
-athlete_results = athlete_results[athlete_results["country_noc"].str.contains("WIF")==False] # Antigua + Barbados + Cayman Islands + Dominica + Grenada + Jamaica + Montserrat + St Christopher-Nevis-Anguilla + Saint Lucia	+ St Vincent and the Grenadines	+ Trinidad and Tobago + Turks and Caicos Islands	
 
 athlete_results['country_noc'] = athlete_results['country_noc'].replace(['FRG'], 'GER')
 athlete_results['country_noc'] = athlete_results['country_noc'].replace(['GDR'], 'GER')
@@ -59,13 +48,25 @@ athlete_results.drop(repeat, inplace=True)
 athlete_results.drop(columns=['edition_id', 'isTeamSport', 'index'], inplace=True)
 athlete_results['edition'] = athlete_results['edition'].str.split().str[0].astype(int)
 
+athlete_results = athlete_results[athlete_results["country_noc"].str.contains("MIX")==False] # Impossivel dividir
+athlete_results = athlete_results[athlete_results["country_noc"].str.contains("EUN")==False] # Impossivel dividir
+athlete_results = athlete_results[athlete_results["country_noc"].str.contains("IOA")==False] # Impossivel dividir
+athlete_results = athlete_results[athlete_results["country_noc"].str.contains("BOH")==False]    # Eslováquia + Republica Checa
+athlete_results = athlete_results[athlete_results["country_noc"].str.contains("ANZ")==False]    # Australia + Nova Zelandia + Nova Guine + partes da Indonesia
+athlete_results = athlete_results[athlete_results["country_noc"].str.contains("TCH")==False]    # Eslováquia + Republica Checa
+athlete_results = athlete_results[athlete_results["country_noc"].str.contains("YUG")==False] # Bosnia + Croacia + Macedonia + Montenegro + Eslovenia + Servia
+athlete_results = athlete_results[athlete_results["country_noc"].str.contains("URS")==False] # Russia + Letonia + Lituania + Estonia + Georgia + Armenia + Azerbaijao + Bielorrussia + Cazaquistao + Moldavia + Quirguistao + Tajiquistao + Turquemenistao + Ucrania + Usbequistao
+athlete_results = athlete_results[athlete_results["country_noc"].str.contains("UAR")==False]  # Egypt + Syria + Faixa de Gaza
+athlete_results = athlete_results[athlete_results["country_noc"].str.contains("WIF")==False] # Antigua + Barbados + Cayman Islands + Dominica + Grenada + Jamaica + Montserrat + St Christopher-Nevis-Anguilla + Saint Lucia	+ St Vincent and the Grenadines	+ Trinidad and Tobago + Turks and Caicos Islands	
+
+
 athlete_results["medal"] = athlete_results["medal"].notnull().mul(1)
 
 athlete_results = athlete_results.merge(country_n, on='country_noc', how='left')
 
 gr = pd.DataFrame(athlete_results.groupby(['country', 'sport', 'edition', 'event']).sum()).reset_index()
 
-gr.to_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','top5_sports_country.csv'), index=False)
+gr.to_csv('../react_site/src/Dataframes/top5_sports_country.csv', index=False)
 
 countries = gr['country'].drop_duplicates().sort_values()
 
@@ -90,17 +91,7 @@ def medals_type(country):
 
     dataset = gr[gr['country'] == country].reset_index()
 
-    new_medal = []
-    for i in range(len(dataset)):
-        edition = dataset.loc[i, 'edition']
-        sport = dataset.loc[i, 'sport']
-        event = dataset.loc[i, 'event']
-
-        new_medal.append(dataset[(dataset['edition'] <= edition) & (dataset['sport'] == sport) & (dataset['event'] == event)]['medal'].sum())
-
     sports = pd.unique(dataset.sport)
-
-    dataset['medal'] = new_medal
 
     dataset2 = dataset.copy()
 

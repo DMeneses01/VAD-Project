@@ -138,16 +138,6 @@ def medals_type(country, sports):
 
     dataset = top_sports[top_sports['country'] == country].reset_index()
 
-    new_medal = []
-    for i in range(len(dataset)):
-        edition = dataset.loc[i, 'edition']
-        sport = dataset.loc[i, 'sport']
-        event = dataset.loc[i, 'event']
-
-        new_medal.append(dataset[(dataset['edition'] <= edition) & (dataset['sport'] == sport) & (dataset['event'] == event)]['medal'].sum())
-
-    dataset['medal'] = new_medal
-
     dataset2 = dataset.copy()
 
     dataset2 = pd.DataFrame(dataset2.groupby(['sport']).sum()).reset_index()
