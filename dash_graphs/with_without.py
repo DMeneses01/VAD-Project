@@ -8,8 +8,8 @@ import plotly.express as px
 from dash import Dash
 Path = os.getcwd()
 
-athlete_Event_Results = pd.read_csv(os.path.join(Path,'Dataset', 'Olympic_Athlete_Event_Results.csv'), sep=',')
-country_n = pd.read_csv(os.path.join(Path,'Dataset', 'Olympics_Country.csv'), sep=',')
+athlete_Event_Results = pd.read_csv('../Dataset/Olympic_Athlete_Event_Results.csv', sep=',')
+country_n = pd.read_csv('../Dataset/Olympics_Country.csv', sep=',')
 
 #merge on country_noc
 
@@ -67,7 +67,7 @@ athlete_results = athlete_results.drop(columns=['edition_id','sport','event','is
 
 athlete_results = athlete_results.merge(country_n, on='country_noc', how='left')
 
-athlete_results.to_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','with_without_country.csv'), index=False)
+athlete_results.to_csv('../react_site/src/Dataframes/with_without_country.csv', index=False)
 
 countries = athlete_results['country'].drop_duplicates().sort_values()
 
