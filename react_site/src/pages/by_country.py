@@ -59,19 +59,19 @@ layout = html.Div(
 		
 
         html.Div([
-            dcc.Graph(id="graph1", style={'position': 'absolute','top':' 1vh', 'left':'0.1vw'})
+            dcc.Graph(id="graph1", style={'position': 'absolute','top':' 1vh', 'left':'0.1vw', 'width':'17.5vw', 'height':'23vh'})
         
         ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
             'position': 'absolute', 'width': '18vw', 'height': '24.5vh', 'left': '3.5vw', 'top':' 19.5vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
         
         html.Div([
-            dcc.Graph(id="graph2", style={'position': 'absolute','top':' 3vh', 'left':'0.1vw'})
+            dcc.Graph(id="graph2", style={'position': 'absolute','top':' 3vh', 'left':'0.1vw',  'width':'17.5vw', 'height':'34vh'})
         
         ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
             'position': 'absolute', 'width': '18vw', 'height': '38vh', 'left': '3.5vw', 'top':' 48vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
         
         html.Div([
-           dcc.Graph(id="graph3", style={'position': 'absolute','top':' 1vh', 'left':'0.5vw'})
+           dcc.Graph(id="graph3", style={'position': 'absolute','top':' 1vh', 'left':'0.5vw', 'width':'90vw', 'height':'35vh'})
         ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
             'position': 'absolute', 'width': '91.1vw', 'height': '38vh', 'left': '3.5vw', 'top':' 90vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
         
@@ -124,7 +124,7 @@ def medals_type(country, sports):
                                 values=[goldv,silverv,bronzev])])                       
     fig1.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
                     marker=dict(colors=colors, line=dict(color='#000000', width=1)))
-    fig1.update_layout(font_family= 'Cabin',autosize = False, width = 300, height = 172, 
+    fig1.update_layout(font_family= 'Cabin',autosize = False, 
                       legend=dict(yanchor="top", xanchor="left", font=dict(size=15)),
                       margin=dict(l=2, r=2, b=20, t=31, pad=0),
                       title={
@@ -156,7 +156,7 @@ def medals_type(country, sports):
 
     dataset2['color'] = color
 
-    fig2 = px.bar(dataset2, x="sport", y="medal", color= 'color', title="Top 5 sports for the country", width=300, height=250,
+    fig2 = px.bar(dataset2, x="sport", y="medal", color= 'color', title="Top 5 sports for the country",
                 color_discrete_sequence=['#0081C8', '#FCB131', '#000000', '#00A651', '#EE334E'] )
     fig2.update_layout(font_family= 'Cabin',autosize = False, 
                         legend=dict(yanchor="top", xanchor="left", font=dict(size=15)),
@@ -221,7 +221,7 @@ def medals_type(country, sports):
                         'yanchor': 'top',
                         'x':0.5},
                       paper_bgcolor="white",
-                      plot_bgcolor="white", width=1520, height=265, autosize = False,
+                      plot_bgcolor="white", autosize = False,
                       legend=dict(yanchor="top", xanchor="left", font=dict(size=15)), 
                       margin=dict(l=1, r=2, b=20, t=31, pad=0))
     

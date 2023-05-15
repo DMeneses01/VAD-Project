@@ -24,7 +24,7 @@ fig1 = px.bar(medals, x="country", y="count", color='medal',
              color_discrete_map={
                 'Gold': colors[0],
                 'Silver': colors[1],
-                'Bronze': colors[2]}, width=300, height=600)
+                'Bronze': colors[2]})
 
 fig1.update_xaxes(categoryorder="total descending")
 fig1.update_layout(font_family= 'Cabin', margin={'t':5, 'b':5, 'r': 3, 'l': 3})
@@ -35,7 +35,7 @@ heatmap = pd.read_csv(os.path.join(Path, 'Dataframes','heatmap.csv'))
 fig2 = px.choropleth(heatmap, geojson=countries, locations='country', locationmode='country names', color='total',
                            color_continuous_scale='sunsetdark',
                            range_color=(0, max(heatmap["total"])),
-                           labels={'total':'medals'},  width=1150, height=550
+                           labels={'total':'medals'}
                           )
 fig2.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, paper_bgcolor="#EEF1FA", font_family= 'Cabin')
 
@@ -47,8 +47,8 @@ layout = html.Div(
 	    
         html.Div(children=[
                 html.Div(children = [
-                    html.H4('Medals by Country', style={'position': 'absolute', 'left': '3.5vw', 'position': 'absolute', 'fontSize': '25px', 'fontFamily': 'Cabin', 'width': '30vw','height': '5vh', 'left':'27vw', 'background': '#EEF1FA'}),
-                    dcc.Graph(id="graph", figure=fig2, style={'position': 'absolute', 'left': '3vw', 'top': '10vh','position': 'absolute', 'background': '#EEF1FA'}),
+                    html.H4('Medals by Country', style={'left': '3.5vw', 'position': 'absolute', 'fontSize': '25px', 'fontFamily': 'Cabin', 'width': '30vw','height': '5vh', 'left':'27vw', 'background': '#EEF1FA'}),
+                    dcc.Graph(id="graph", figure=fig2, style={'position': 'absolute', 'left': '3vw', 'top': '10vh','background': '#EEF1FA', 'width': '65vw','height': '70vh'}),
                     
                 ])
         ], style = {'position': 'absolute', 'width': '72vw','height': '88vh', 'left': '26vw', 'top': '11vh', 'background': '#EEF1FA', 'borderRadius': '12px 0px 0px 12px'}),
@@ -100,7 +100,7 @@ layout = html.Div(
                 ),      
                 html.Div(children = [
                     html.H4('Top 10 Medals by Country', style={'position': 'absolute', 'left': '3.5vw'}),
-                    dcc.Graph(id="graph", figure=fig1, style={'position': 'absolute', 'left': '0.2vw', 'top': '7vh'}),    
+                    dcc.Graph(id="graph", figure=fig1, style={'position': 'absolute', 'left': '0.2vw', 'top': '7vh', 'width':'17vw', 'height':'78vh'}),    
                 ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 'position': 'absolute',
                         'width': '18vw', 'height': '87vh', 'left': '3.5vw', 'top': '11vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'})
             ]),

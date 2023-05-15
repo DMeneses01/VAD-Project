@@ -55,14 +55,14 @@ layout = html.Div(
 
 
         html.Div([
-            dcc.Graph(id="g2", style={'position': 'absolute','top':' 1.5vh', 'left':'0.5vw',  'width':'15vw', 'height':'65vh'})
+            dcc.Graph(id="g2", style={'position': 'absolute','top':' 1.5vh', 'left':'0.5vw',  'width':'17vw', 'height':'64vh'})
 
         ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'position': 'absolute',
                         'width': '18vw', 'height': '66.5vh', 'left': '3.5vw', 'top': '19.5vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
         
 
         html.Div([
-           dcc.Graph(id="g1", style={'position':'absolute', 'top':' 1.5vh', 'left':'0.5vw',  'width':'90vw', 'height':'35vh',})
+           dcc.Graph(id="g1", style={'position':'absolute', 'top':' 1.5vh', 'left':'0.5vw',  'width':'90vw', 'height':'35vh'})
         ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
             'position': 'absolute', 'width': '91.1vw', 'height': '38vh', 'left': '3.5vw', 'top':' 90vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
         
