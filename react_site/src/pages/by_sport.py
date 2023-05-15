@@ -55,7 +55,7 @@ layout = html.Div(
 
 
         html.Div([
-            dcc.Graph(id="g2", style={'position': 'absolute','top':' 1.5vh', 'left':'0.5vw'})
+            dcc.Graph(id="g2", style={'position': 'absolute','top':' 1.5vh', 'left':'0.5vw',  'width':'15vw', 'height':'65vh'})
 
         ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'position': 'absolute',
                         'width': '18vw', 'height': '66.5vh', 'left': '3.5vw', 'top': '19.5vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
@@ -168,11 +168,10 @@ def sports_callback(sports):
     fig2 = go.Figure()
 
     fig2 = px.bar(medals, x="country", y="count", color='medal', 
-             color_discrete_map={
+            color_discrete_map={
                 'Gold': '#D6AF36',
                 'Silver': '#A7A7AD',
                 'Bronze': '#A77044'}, 
-            width=300, height=480,
             title="Top Medals by Country in the sport")
     fig2.update_xaxes(categoryorder="total descending")
     fig2.update_layout(font_family= 'Cabin', margin=dict(l=1, r=2, b=20, t=31, pad=0))
