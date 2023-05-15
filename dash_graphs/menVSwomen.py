@@ -82,14 +82,39 @@ def medals_type(sport):
     df["gender"] = gender
     df["count"] = count
 
+    df_male = df[df.gender == 'Male']
+    df_female = df[df.gender == 'Female']
+
+    df_female['count'] = - df_female['count']
+
     fig = go.Figure()
 
-    fig = px.bar(df, x="year", y="count", color="gender", 
-                 title="<b>Men vs Women evolution", width=1520, height=265,
-             color_discrete_map={'Female': '#FCB131', 'Male': '#00A651'}, orientation='v')
+    fig.add_trace(go.Bar(
+        x = df_female.year,
+        y = df_female["count"],
+        name = 'Female',
+
+        marker_color='#EE334E'
+    ))
+
+    fig.add_trace(go.Bar(
+            x = df_male.year,
+            y = df_male["count"],
+            name = 'Male',
+
+            marker_color='#0081C8'
+    ))
 
 
-    fig.update_layout(font_family= 'Cabin',autosize = False, 
+    fig.update_layout(xaxis=dict(tickformat='(.0f'), barmode = 'relative', font_family= 'Cabin',autosize = False, 
+                      yaxis_title="count", xaxis_title="year",
+                      title={
+                        'text': "<b>Females vs Males</b>",
+                        'xanchor': 'center',
+                        'yanchor': 'top',
+                        'x':0.5},
+                      paper_bgcolor="white",
+                      plot_bgcolor="white",
                       legend=dict(yanchor="top", xanchor="left", font=dict(size=15)),
                       margin=dict(l=1, r=2, b=20, t=31, pad=0))
 
