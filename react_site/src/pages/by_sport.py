@@ -200,26 +200,22 @@ def sports_callback(sports):
 
     df = pd.DataFrame(athlete_r.groupby(['edition','country_noc']).sum()).reset_index()
 
-    for i in df['edition'].unique():
-        for j in df['country_noc'].unique():
-            if df[(df['edition'] == i) & (df['country_noc'] == j)].empty:
-                df.loc[len(df), ['edition','country_noc', 'medal']] = i, j, 0
+    # Create a MultiIndex with all possible combinations of edition and country_noc
+    index = pd.MultiIndex.from_product([df['edition'].unique(), df['country_noc'].unique()], names=['edition', 'country_noc'])
+
+    # Reindex the DataFrame with the new MultiIndex and fill missing values with 0
+    df = df.set_index(['edition', 'country_noc']).reindex(index, fill_value=0).reset_index()
 
     df['edition'] = df['edition'].astype(int)
     df['medal'] = df['medal'].astype(int)
 
-    new_medal = []
-    for i in range(len(df)):
-        edition = df.loc[i, 'edition']
-        country = df.loc[i, 'country_noc']
-        medals = df.loc[i, 'medal']
+    # Sort the DataFrame by edition and country_noc
+    df = df.sort_values(['edition', 'country_noc'])
 
-        new_medal.append(df[(df['edition'] <= edition) & (df['country_noc'] == country)]['medal'].sum())
-
-    df['medals'] = new_medal
-    df.drop(columns=['medal'], inplace=True)
+    # Group the DataFrame by country_noc and calculate the cumulative sum of the medal column
+    df['new_medal'] = df.groupby('country_noc')['medal'].cumsum()
     
-    my_raceplot = barplot(df, item_column='country_noc', value_column='medals', time_column='edition')
+    my_raceplot = barplot(df, item_column='country_noc', value_column='new_medal', time_column='edition')
 
     my_raceplot.plot(item_label = 'Top 10 countries', value_label = 'Amount of Medals', time_label='Year ', frame_duration = 800)
     
