@@ -8,21 +8,21 @@ from raceplotly.plots import barplot
 
 import PIL
 
-image_path = os.path.abspath('react_site/src/pages/components/olympic-rings.png')
+image_path = os.path.abspath('pages/components/olympic-rings.png')
 pil_rings = PIL.Image.open(image_path)
 
-image_path = os.path.abspath('react_site/src/pages/components/round-chevron-right.png')
+image_path = os.path.abspath('pages/components/round-chevron-right.png')
 pil_seta = PIL.Image.open(image_path)
 
-image_path = os.path.abspath('react_site/src/pages/components/button.png')
+image_path = os.path.abspath('pages/components/button.png')
 pil_button = PIL.Image.open(image_path)
 
 Path = os.getcwd()
-mVSw = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','menVSwomen.csv'))
+mVSw = pd.read_csv(os.path.join(Path, 'Dataframes','menVSwomen.csv'))
 
-topMedals = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','topMedals_sport.csv'))
+topMedals = pd.read_csv(os.path.join(Path, 'Dataframes','topMedals_sport.csv'))
 
-raceplot = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','raceplot.csv'))
+raceplot = pd.read_csv(os.path.join(Path, 'Dataframes','raceplot.csv'))
 
 sport = mVSw['sport'].drop_duplicates().sort_values()
 
@@ -47,9 +47,8 @@ layout = html.Div(
         
         html.Div(children=[
              html.Div(children = [
-                    html.H4('Country Race', style={'position': 'absolute', 'left': '3.5vw', 'position': 'absolute', 'fontSize': '25px', 'fontFamily': 'Cabin', 'width': '30vw','height': '5vh', 'left':'27vw', 'background': '#EEF1FA'}),
-                    dcc.Graph(id="g3", style={'position': 'absolute', 'left': '3vw', 'top': '10vh','position': 'absolute'}),
-                    
+                    dcc.Graph(id="g3", style={'position': 'absolute', 'left': '3vw', 'top': '5vh','position': 'absolute', 'width': '150vw','height': '100vh'}),
+                    html.H4('Country Race', style={'position': 'absolute', 'left': '3.5vw', 'position': 'absolute', 'fontSize': '25px', 'fontFamily': 'Cabin', 'width': '30vw','height': '5vh', 'left':'27vw', 'background': '#FFFFFF'}),
             ])
            
         ], style = {'position': 'absolute', 'width': '68.5vw','height': '75vh', 'left': '26vw', 'top': '11vh', 'background': '#FFFFFF', 'borderRadius': '12px 12px 12px 12px', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)'}),
