@@ -47,7 +47,7 @@ layout = html.Div(
         
         html.Div(children=[
              html.Div(children = [
-                    dcc.Graph(id="g3", style={'position': 'absolute', 'left': '3vw', 'top': '5vh','position': 'absolute', 'width': '150vw','height': '100vh'}),
+                    dcc.Graph(id="g3", style={'position': 'absolute', 'left': '3vw', 'top': '5vh', 'width': '65vw','height': '65vh'}),
                     html.H4('Country Race', style={'position': 'absolute', 'left': '3.5vw', 'position': 'absolute', 'fontSize': '25px', 'fontFamily': 'Cabin', 'width': '30vw','height': '5vh', 'left':'27vw', 'background': '#FFFFFF'}),
             ])
            

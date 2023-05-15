@@ -33,7 +33,7 @@ countries = gpd.read_file('../../Dataset/countries.geojson')
 heatmap = pd.read_csv(os.path.join(Path, 'Dataframes','heatmap.csv'))
 
 fig2 = px.choropleth(heatmap, geojson=countries, locations='country', locationmode='country names', color='total',
-                           color_continuous_scale='viridis',
+                           color_continuous_scale='sunsetdark',
                            range_color=(0, max(heatmap["total"])),
                            labels={'total':'medals'},  width=1150, height=550
                           )
