@@ -126,10 +126,17 @@ def medals_type(country):
             marker_color=colors[1]
     ))
 
-    fig.update_layout(xaxis=dict(tickformat='(.0f'), barmode = 'relative', font_family= 'Cabin', title = '<b>Medals vs Participations', paper_bgcolor="white",plot_bgcolor="white", width=1700, height=300
-    )
-
-    fig.update_layout(font_family= 'Cabin',autosize = False,legend=dict(yanchor="top", xanchor="left", font=dict(size=15)), margin=dict(l=1, r=2, b=20, t=31, pad=0))
+    fig.update_layout(xaxis=dict(tickformat='(.0f'), barmode = 'relative', font_family= 'Cabin',
+                      yaxis_title="count", xaxis_title="year",
+                      title={
+                        'text': "<b>Medals vs Participations</b>",
+                        'xanchor': 'center',
+                        'yanchor': 'top',
+                        'x':0.5},
+                      paper_bgcolor="white",
+                      plot_bgcolor="white", width=1700, height=300, autosize = False,
+                      legend=dict(yanchor="top", xanchor="left", font=dict(size=15)), 
+                      margin=dict(l=1, r=2, b=20, t=31, pad=0))
 
 
     return fig

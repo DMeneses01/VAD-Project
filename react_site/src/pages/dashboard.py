@@ -90,7 +90,14 @@ layout = html.Div(
         html.Div([
                 html.H1('Jogos Olímpicos à Lupa', style={'position': 'absolute', 'width': '30vw', 'height': '3.22vh', 'left': '4vw', 'top': '2vh',
                             'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontSize': '3vh', 'lineHeight': '2.44vh', 'display': 'flex', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing':' 0.05em'}),
-                html.Img(src=pil_rings, style={'position': 'absolute', 'width': '3vw', 'height': '3.5vh', 'left': '0.5vw', 'top': '3.7vh'}),        
+                html.Div(
+                    [
+                        html.A(html.Img(src=pil_rings, style={'position': 'absolute', 'width': '3vw', 'height': '3.5vh', 'left': '0.5vw', 'top': '3.7vh'}), href='/'),
+                        dcc.Location(id='url', refresh=False),
+                      
+                    ]
+                
+                ),      
                 html.Div(children = [
                     html.H4('Top 10 Medals by Country', style={'position': 'absolute', 'left': '3.5vw'}),
                     dcc.Graph(id="graph", figure=fig1, style={'position': 'absolute', 'left': '0.2vw', 'top': '7vh'}),    
