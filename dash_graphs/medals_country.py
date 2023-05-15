@@ -8,7 +8,7 @@ import plotly.express as px
 from dash import Dash
 Path = os.getcwd()
 
-games_Medal = pd.read_csv(os.path.join(Path,'Dataset', 'Olympic_Games_Medal_Tally.csv'), sep=',')
+games_Medal = pd.read_csv('../Dataset/Olympic_Games_Medal_Tally.csv', sep=',')
 games_Medal = games_Medal.replace(["na"], None)
 
 games_Medal = games_Medal[games_Medal["edition"].str.contains("Winter") == False]   # apenas jogos de verao
@@ -58,7 +58,7 @@ df.loc[df['country'] == "Russian Federation", ['silver']] += df.loc[df['country'
 df.loc[df['country'] == "Russian Federation", ['bronze']] += df.loc[df['country'] == "ROC", ['bronze']].values[0][0]
 df = df[df["country"].str.contains("ROC")==False]
 
-df.to_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','medals_country.csv'), index=False)
+df.to_csv('../react_site/src/Dataframes/medals_country.csv', index=False)
 
 countries = df['country'].drop_duplicates().sort_values()
 

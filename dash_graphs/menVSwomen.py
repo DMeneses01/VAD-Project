@@ -8,15 +8,22 @@ import plotly.express as px
 from dash import Dash
 
 Path = os.getcwd()
-athlete_Bio = pd.read_csv(os.path.join(Path,'Dataset', 'Olympic_Athlete_Bio.csv'), sep=',')
+athlete_Bio = pd.read_csv('../Dataset/Olympic_Athlete_Bio.csv', sep=',')
 
 athlete_Bio = athlete_Bio.replace(["na"], None)
 athlete_Bio["height"] = athlete_Bio["height"].astype(float)
 
-athlete_Event_Results = pd.read_csv(os.path.join(Path,'Dataset', 'Olympic_Athlete_Event_Results.csv'), sep=',')
+athlete_Event_Results = pd.read_csv('../Dataset/Olympic_Athlete_Event_Results.csv', sep=',')
 athlete_Event_Results = athlete_Event_Results.replace(["na"], None)
 
 athlete_Event_Results = athlete_Event_Results[athlete_Event_Results["edition"].str.contains("Winter") == False]
+
+athlete_Event_Results['country_noc'] = athlete_Event_Results['country_noc'].replace(['FRG'], 'GER')
+athlete_Event_Results['country_noc'] = athlete_Event_Results['country_noc'].replace(['GDR'], 'GER')
+
+athlete_Event_Results['country_noc'] = athlete_Event_Results['country_noc'].replace(['HKG'], 'CHN')
+
+athlete_Event_Results['country_noc'] = athlete_Event_Results['country_noc'].replace(['ROC'], 'RUS')
 
 athlete_Bio.drop(columns=['name', 'born', 'height', 'weight', 'country', 'country_noc', 'description', 'special_notes'], inplace=True)
 athlete_Event_Results.drop(columns=['edition_id', 'country_noc', 'result_id', 'pos', 'medal', 'isTeamSport'], inplace=True)
@@ -25,7 +32,7 @@ df_aux = pd.merge(athlete_Bio, athlete_Event_Results, on='athlete_id')
 
 df_aux['edition'] = df_aux['edition'].str.split().str[0].astype(int)
 
-df_aux.to_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','menVSwomen.csv'), index=False)
+df_aux.to_csv('../react_site/src/Dataframes/menVSwomen.csv', index=False)
 
 
 sport = df_aux["sport"].drop_duplicates().sort_values()
