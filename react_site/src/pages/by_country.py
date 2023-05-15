@@ -7,21 +7,21 @@ import plotly.graph_objects as go
 
 import PIL
 
-image_path = os.path.abspath('react_site/src/pages/components/olympic-rings.png')
+image_path = os.path.abspath('pages/components/olympic-rings.png')
 pil_rings = PIL.Image.open(image_path)
 
-image_path = os.path.abspath('react_site/src/pages/components/round-chevron-right.png')
+image_path = os.path.abspath('pages/components/round-chevron-right.png')
 pil_seta = PIL.Image.open(image_path)
 
-image_path = os.path.abspath('react_site/src/pages/components/button.png')
+image_path = os.path.abspath('pages/components/button.png')
 pil_button = PIL.Image.open(image_path)
 
 Path = os.getcwd()
-medals = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','medals_country.csv'))
+medals = pd.read_csv(os.path.join(Path,'Dataframes','medals_country.csv'))
 
-top_sports = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','top5_sports_country.csv'))
+top_sports = pd.read_csv(os.path.join(Path, 'Dataframes','top5_sports_country.csv'))
 
-with_without = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','with_without_country.csv'))
+with_without = pd.read_csv(os.path.join(Path, 'Dataframes','with_without_country.csv'))
 
 countries = medals['country'].drop_duplicates().sort_values()
 

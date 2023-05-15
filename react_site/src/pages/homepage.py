@@ -4,13 +4,13 @@ import plotly.express as px
 import os
 import PIL
 
-image_path = os.path.abspath('react_site/src/pages/components/olympic-rings.png')
+image_path = os.path.abspath('pages/components/olympic-rings.png')
 pil_rings = PIL.Image.open(image_path)
 
-image_path = os.path.abspath('react_site/src/pages/components/git.png')
+image_path = os.path.abspath('pages/components/git.png')
 pil_git = PIL.Image.open(image_path)
 
-image_path = os.path.abspath('react_site/src/pages/components/round-chevron-right.png')
+image_path = os.path.abspath('pages/components/round-chevron-right.png')
 pil_seta = PIL.Image.open(image_path)
 
 dash.register_page(__name__, path='/') 

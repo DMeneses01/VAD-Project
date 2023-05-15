@@ -7,16 +7,16 @@ import geopandas as gpd
 
 import PIL
 
-image_path = os.path.abspath('react_site/src/pages/components/olympic-rings.png')
+image_path = os.path.abspath('pages/components/olympic-rings.png')
 pil_rings = PIL.Image.open(image_path)
 
-image_path = os.path.abspath('react_site/src/pages/components/round-chevron-right.png')
+image_path = os.path.abspath('pages/components/round-chevron-right.png')
 pil_seta = PIL.Image.open(image_path)
 
 app = Dash(__name__)
 
 Path = os.getcwd()
-medals = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','top10_medals.csv'))
+medals = pd.read_csv(os.path.join(Path, 'Dataframes','top10_medals.csv'))
 
 colors = ['#D6AF36', '#A7A7AD', '#A77044']
 
@@ -29,8 +29,8 @@ fig1 = px.bar(medals, x="country", y="count", color='medal',
 fig1.update_xaxes(categoryorder="total descending")
 fig1.update_layout(font_family= 'Cabin', margin={'t':5, 'b':5, 'r': 3, 'l': 3})
 
-countries = gpd.read_file(os.path.join(os.getcwd(), 'Dataset', 'countries.geojson'))
-heatmap = pd.read_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','heatmap.csv'))
+countries = gpd.read_file('../../Dataset/countries.geojson')
+heatmap = pd.read_csv(os.path.join(Path, 'Dataframes','heatmap.csv'))
 
 fig2 = px.choropleth(heatmap, geojson=countries, locations='country', locationmode='country names', color='total',
                            color_continuous_scale='viridis',
