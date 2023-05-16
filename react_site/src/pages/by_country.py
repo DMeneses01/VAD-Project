@@ -146,7 +146,7 @@ def medals_type(country, sports):
 
     dataset2['color'] = color
 
-    fig2 = px.bar(dataset2, x="sport", y="medal", color= 'color', title="Top 5 sports for the country",
+    fig2 = px.bar(dataset2, x="sport", y="medal", color= 'color', title="Top 5 sports of the country",
                 color_discrete_sequence=['#0081C8', '#FCB131', '#000000', '#00A651', '#EE334E'] )
     fig2.update_layout(font_family= 'Cabin',autosize = False, 
                         legend=dict(yanchor="top", xanchor="left", font=dict(size=15)),
@@ -190,7 +190,7 @@ def medals_type(country, sports):
     fig3.add_trace(go.Bar(
             y = df_with["count"],
             x = df_with.year,
-            name = 'With',
+            name = 'With medal',
             
             marker_color=colorsw[0]
     ))
@@ -198,7 +198,7 @@ def medals_type(country, sports):
     fig3.add_trace(go.Bar(
             y = df_without["count"],
             x = df_without.year,
-            name = 'Without',
+            name = 'Without medal',
             
             marker_color=colorsw[1]
     ))
