@@ -31,7 +31,27 @@ dash.register_page(__name__, path='/by_sport')
 
 layout = html.Div(
     [
-	    
+        html.Div([
+                html.H1("By sport", style= {'position': 'relative', 'width': '10vw', 'height': '5vh', 'left': '89vw', 'top': '1vh', 'fontFamily': 'Cabin', 'fontSize':'2.5vh'}),
+                
+                html.Div(
+                    [
+                        html.A(html.Img(src=pil_button, style={'position': 'relative', 'width': '2vw', 'height': '3.5vh', 'top': '2vh', 'rotate': '180deg', 'background': '#000000', 'borderRadius': '7px', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'left':'-9vw'}), href='/dashboard'),
+                        dcc.Location(id='url', refresh=False),
+                      
+                    ]
+                
+                ),
+
+                html.H1('The Olympics under a magnifying glass', style={'position': 'relative', 'width': '30vw', 'height': '3.22vh', 'left':'-9vw','top': '0.5vh',
+                            'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontSize': '3vh', 'lineHeight': '2.44vh', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing':' 0.05em'}),
+                
+                
+
+                html.Img(src=pil_rings, style={'position': 'relative', 'width': '3vw', 'height': '3.5vh', 'left':'-9vw', 'top': '2vh'}),        
+            
+        ], style={'display':'flex'}),
+
         html.Div(children = [
             dcc.Dropdown(id="dropdown",
             options=[ {'label': x, 'value': x}
@@ -42,56 +62,31 @@ layout = html.Div(
                 style={'width': '18vw', 'height':'3vh', 'fontSize':'2.5vh','top':'1vh'}
             ),
 
-        ],  style= {'position':'absolute', 'fontFamily': 'Cabin', 'top':'11vh', 'left':'3.5vw'}),
+        ],  style= {'position':'relative', 'fontFamily': 'Cabin', 'left':'3.5vw'}),
 
         
         html.Div(children=[
              html.Div(children = [
-                    dcc.Graph(id="g3", style={'position': 'absolute', 'left': '3vw', 'top': '5vh', 'width': '65vw','height': '65vh'}),
-                    html.H4('Country Race', style={'position': 'absolute', 'left': '3.5vw', 'position': 'absolute', 'fontSize': '25px', 'fontFamily': 'Cabin', 'width': '30vw','height': '5vh', 'left':'27vw', 'background': '#FFFFFF'}),
+                    html.H4('Country Race', style={'position': 'relative', 'left': '4vw', 'top':'3vh', 'fontSize': '25px', 'fontFamily': 'Cabin', 'width': '30vw','height': '5vh', 'left':'27vw', 'background': '#FFFFFF'}),
+                    dcc.Graph(id="g3", style={'position': 'relative', 'left': '3vw', 'width': '65vw','height': '65vh', 'fontFamily': 'Cabin'}),
             ])
            
-        ], style = {'position': 'absolute', 'width': '68.5vw','height': '75vh', 'left': '26vw', 'top': '11vh', 'background': '#FFFFFF', 'borderRadius': '12px 12px 12px 12px', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)'}),
+        ], style = {'position': 'relative', 'width': '68.5vw','height': '75vh', 'left': '26vw', 'background': '#FFFFFF', 'borderRadius': '12px 12px 12px 12px', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'top':'-6vh'}),
 
 
         html.Div([
-            dcc.Graph(id="g2", style={'position': 'absolute','top':' 1.5vh', 'left':'0.5vw',  'width':'17vw', 'height':'64vh'})
+            dcc.Graph(id="g2", style={'position': 'relative','top':' 1.5vh', 'left':'0.5vw',  'width':'17vw', 'height':'64vh'})
 
-        ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'position': 'absolute',
-                        'width': '18vw', 'height': '66.5vh', 'left': '3.5vw', 'top': '19.5vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
+        ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'position': 'relative',
+                        'width': '18vw', 'height': '66.5vh', 'left': '3.5vw', 'top': '-72.5vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
         
 
         html.Div([
-           dcc.Graph(id="g1", style={'position':'absolute', 'top':' 1.5vh', 'left':'0.5vw',  'width':'90vw', 'height':'35vh'})
-        ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 
-            'position': 'absolute', 'width': '91.1vw', 'height': '38vh', 'left': '3.5vw', 'top':' 90vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
-        
-        html.Div([
-                html.H1("By sport", style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '89vw', 'top': '2vh', 'fontFamily': 'Cabin', 'fontSize':'2.5vh'}),
-                
-                html.H1('Jogos Olímpicos à Lupa', style={'position': 'absolute', 'width': '30vw', 'height': '3.22vh', 'left': '4vw', 'top': '2vh',
-                            'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontSize': '3vh', 'lineHeight': '2.44vh', 'display': 'flex', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing':' 0.05em'}),
-                
-                html.Div(
-                    [
-                        html.A(html.Img(src=pil_button, style={'position': 'absolute', 'width': '2vw', 'height': '3.5vh', 'left': '1vw', 'top': '4vh', 'rotate': '180deg', 'background': '#000000', 'borderRadius': '7px', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)'}), href='/dashboard'),
-                        dcc.Location(id='url', refresh=False),
+           dcc.Graph(id="g1", style={'position':'relative', 'top':' 1.5vh', 'left':'0.5vw',  'width':'90vw', 'height':'35vh'})
+        ], style={'fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB',  'top': '-68vh', 
+            'position': 'relative', 'width': '91.1vw', 'height': '38vh', 'left': '3.5vw', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
                       
-                    ]
-                
-                ),
-
-
-                html.Img(src=pil_rings, style={'position': 'absolute', 'width': '3vw', 'height': '3.5vh', 'left': '19.5vw', 'top': '4vh'}),        
-            
-        ]),
-                    
-        html.Div(
-            style={
-                'backgroundColor': '#F6F7FB',
-                'height': '127.5vh'}
-		)
-    ]
+    ], style={'width': '80%', 'height': '0'}
 )
 
 
@@ -153,15 +148,16 @@ def sports_callback(sports):
     ))
 
     fig1.update_layout(xaxis=dict(tickformat='(.0f'), barmode = 'relative',
-                       font_family= 'Cabin',autosize = False, 
+                    font_family= 'Cabin',autosize = False, 
                     title={
                         'text': "<b>Men vs Women evolution</b>",
                         'xanchor': 'center',
                         'yanchor': 'top',
                         'x':0.5,
                         'y':1}, 
-                      legend=dict(yanchor="top", xanchor="left", font=dict(size=15)),
-                      margin=dict(l=1, r=2, b=20, t=31, pad=0))
+                    legend=dict(yanchor="top", xanchor="left", font=dict(size=15)),
+                    margin=dict(l=1, r=2, b=20, t=31, pad=0),
+                    yaxis_title="Number", xaxis_title="Edition",)
     
     ## Top Medals by Country in the sport
     athleter = topMedals[topMedals['sport'] == sports].reset_index()
@@ -186,13 +182,13 @@ def sports_callback(sports):
     fig2 = go.Figure()
 
     fig2 = px.bar(medals, x="country", y="count", color='medal', 
-            color_discrete_map={
+            color_discrete_map={    
                 'Gold': '#D6AF36',
                 'Silver': '#A7A7AD',
                 'Bronze': '#A77044'}, 
-            title="Top Medals by Country in the sport")
+            title="Top Countries in the sport")
     fig2.update_xaxes(categoryorder="total descending")
-    fig2.update_layout(font_family= 'Cabin', margin=dict(l=1, r=2, b=20, t=31, pad=0))
+    fig2.update_layout(font_family= 'Cabin', margin=dict(l=1, r=2, b=20, t=31, pad=0),  yaxis_title="Medals", xaxis_title="Country",)
 
     ## Raceplot
 
@@ -217,6 +213,6 @@ def sports_callback(sports):
     
     my_raceplot = barplot(df, item_column='country_noc', value_column='new_medal', time_column='edition')
 
-    my_raceplot.plot(item_label = 'Top 10 countries', value_label = 'Amount of Medals', time_label='Year ', frame_duration = 800)
+    my_raceplot.plot(item_label = 'Countries', value_label = 'Amount of Medals', time_label='Year ', frame_duration = 800)
     
     return fig1, fig2, my_raceplot.fig
