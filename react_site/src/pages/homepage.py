@@ -42,13 +42,13 @@ layout = html.Div(
                         [
                             html.Div(
                                 dcc.Link(
-                                    f"{'Next'}", href=page["relative_path"]
+                                    f"{'About'}", href=page["relative_path"]
                                 ), style={'position': 'relative', 'width': '3vw', 'height':'6.5vh', 'left': '3vw', 'top':'-0.9vh',
                                         'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontWeight': '500', 'fontSize': '2.6vh',
                                         'lineHeight': '1.89vh', 'display': 'flex', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing': '0.05em'}
                             )
                             for page in dash.page_registry.values()
-                            if page["path"] == "/dashboard"
+                            if page["path"] == "/about"
                         ], style= {'position': 'relative', 'width': '10vw', 'height': '5vh', 'left': '7.5vw',
                                     'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '12px'}
 				    ), 
@@ -77,6 +77,22 @@ layout = html.Div(
                     html.A('@patii01', href='https://github.com/patii01', style={'position':'relative','width': '20vw', 'height': '2vh', 'left': '-1vw', 'top': '15vh', 'fontSize': '2.6vh'})
                 ], style={'transform':' translatey(-135vh)','fontFamily': 'Cabin', 'fontStyle': 'normal', 'color': '#000000', 'backgroundColor': '#F6F7FB', 'position': 'relative',
                         'width': '18vw', 'height': '35vh', 'left': '3.5vw', 'top': '50vh', 'background': '#FFFFFF', 'boxShadow': '0px 4px 20px rgba(0, 0, 0, 0.15)', 'borderRadius': '12px'}),
-            ])
+            ]),
+
+        html.Div(
+                [
+                    html.Div(
+                        dcc.Link(
+                            f"{'Next'}", href=page["relative_path"]
+                        ), style={'position': 'relative', 'width': '10vw', 'height':'6.5vh', 'left': '3vw', 'top':'-0.9vh',
+                                'fontFamily': 'Cabin', 'fontStyle': 'normal', 'fontWeight': '500', 'fontSize': '2.6vh',
+                                'lineHeight': '1.89vh', 'display': 'flex', 'alignItems': 'center', 'textAlign': 'center', 'letterSpacing': '0.05em'}
+                    )
+                    for page in dash.page_registry.values()
+                    if page["path"] == "/dashboard"
+                ], style= {'position': 'relative', 'width': '10vw', 'height': '5vh', 'left': '85vw', 'top': '-169vh',
+                            'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '12px'}
+            ),
+            html.Img(src=pil_seta, style={'position': 'relative', 'width': '1.5vw', 'height': '3vh', 'left': '93vw', 'top': '-173vh'})
     ]
 )
