@@ -85,10 +85,10 @@ layout = html.Div(
                             )
                             for page in dash.page_registry.values()
                             if page["path"] == "/by_country"
-                        ], style= {'position': 'relative', 'width': '10vw', 'height': '5vh', 'left': '74vw', 'top': '-187vh',
+                        ], style= {'position': 'relative', 'width': '10vw', 'height': '5vh', 'left': '74vw', 'top': '-188vh',
                                     'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '12px'}
 				    ), 
-				    html.Img(src=pil_seta, style={'position': 'relative', 'width': '1.5vw', 'height': '3vh', 'left': '82vw', 'top': '-191vh'}), 
+				    html.Img(src=pil_seta, style={'position': 'relative', 'width': '1.5vw', 'height': '3vh', 'left': '82vw', 'top': '-192vh'}), 
                     html.Div(
                         [
                             html.Div(
@@ -100,10 +100,10 @@ layout = html.Div(
                             )
                             for page in dash.page_registry.values()
                             if page["path"] == "/by_sport"
-                        ], style= {'position': 'relative', 'width': '10vw', 'height': '5vh', 'left': '85vw', 'top': '-195.5vh',
+                        ], style= {'position': 'relative', 'width': '10vw', 'height': '5vh', 'left': '85vw', 'top': '-196.5vh',
                                     'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '12px'}
 				    ),
-                    html.Img(src=pil_seta, style={'position': 'relative', 'width': '1.5vw', 'height': '3vh', 'left': '93vw', 'top': '-199.5vh'}),        
+                    html.Img(src=pil_seta, style={'position': 'relative', 'width': '1.5vw', 'height': '3vh', 'left': '93vw', 'top': '-200.5vh'}),        
                 ]
         ),
 
