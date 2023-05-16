@@ -68,7 +68,7 @@ layout = html.Div(
                         ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '74vw', 'top': '3vh',
                                     'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '12px'}
 				    ), 
-				    html.Img(src=pil_seta, style={'position': 'absolute', 'width': '2vw', 'height': '3.5vh', 'left': '82vw', 'top': '3.8vh'}), 
+				    html.Img(src=pil_seta, style={'position': 'absolute', 'width': '1.5vw', 'height': '3vh', 'left': '82vw', 'top': '4vh'}), 
                     html.Div(
                         [
                             html.Div(
@@ -83,7 +83,7 @@ layout = html.Div(
                         ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '85vw', 'top': '3vh',
                                     'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '12px'}
 				    ),
-                    html.Img(src=pil_seta, style={'position': 'absolute', 'width': '2vw', 'height': '3.5vh', 'left': '93vw', 'top': '3.8vh'}),        
+                    html.Img(src=pil_seta, style={'position': 'absolute', 'width': '1.5vw', 'height': '3vh', 'left': '93vw', 'top': '4vh'}),        
                 ]
         ),
 	

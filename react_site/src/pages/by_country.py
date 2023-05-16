@@ -23,6 +23,8 @@ top_sports = pd.read_csv(os.path.join(Path, 'Dataframes','top5_sports_country.cs
 
 with_without = pd.read_csv(os.path.join(Path, 'Dataframes','with_without_country.csv'))
 
+linechart = pd.read_csv(os.path.join(Path, 'Dataframes','linechart_country.csv'))
+
 countries = medals['country'].drop_duplicates().sort_values()
 
 colors = ['#D6AF36', '#A7A7AD', '#A77044']
@@ -47,7 +49,7 @@ layout = html.Div(
 
         html.Div(children=[
             html.Div(children=[
-                dcc.Graph(id="graph"),
+                dcc.Graph(id="graph", style={'height':'70vh'}),
                 dcc.Checklist(
                     id='checklist',
                     options=[],
@@ -138,15 +140,13 @@ def medals_type(country, sports):
 
     dataset = top_sports[top_sports['country'] == country].reset_index()
 
-    dataset2 = dataset.copy()
+    dataset = pd.DataFrame(dataset.groupby(['sport']).sum()).reset_index()
 
-    dataset2 = pd.DataFrame(dataset2.groupby(['sport']).sum()).reset_index()
+    dataset = dataset.sort_values(by=['medal'], ascending=False).head(5)
 
-    dataset2 = dataset2.sort_values(by=['medal'], ascending=False).head(5)
+    dataset['color'] = color
 
-    dataset2['color'] = color
-
-    fig2 = px.bar(dataset2, x="sport", y="medal", color= 'color', title="Top 5 sports of the country",
+    fig2 = px.bar(dataset, x="sport", y="medal", color= 'color', title="Top 5 sports of the country",
                 color_discrete_sequence=['#0081C8', '#FCB131', '#000000', '#00A651', '#EE334E'] )
     fig2.update_layout(font_family= 'Cabin',autosize = False, 
                         legend=dict(yanchor="top", xanchor="left", font=dict(size=15)),
@@ -218,10 +218,22 @@ def medals_type(country, sports):
     ## Line Chart
     fig = go.Figure()
 
-    df = dataset#px.data.gapminder()
-    mask = df.sport.isin(sports)
+    df = linechart[linechart['country'] == country].reset_index()
+
+    new_medal = []
+    for i in range(len(df)):
+        edition = df.loc[i, 'edition']
+        sport = df.loc[i, 'Type_sport']
+        event = df.loc[i, 'sport']
+
+        new_medal.append(df[(df['edition'] <= edition) & (df['Type_sport'] == sport) & (df['sport'] == event)]['medal'].sum())
+
+    df['medal'] = new_medal
+
+
+    mask = df.Type_sport.isin(sports)
     fig = px.line(df[mask], 
-        x="edition", y="medal", color='event').update_layout({
+        x="edition", y="medal", color='sport').update_layout({
                                                     'plot_bgcolor': '#FFFFFF',
                                                     'paper_bgcolor': '#EEF1FA'
                                                     }, font_family= 'Cabin'
@@ -238,4 +250,4 @@ def medals_type(country, sports):
 
     
 
-    return fig1, fig2, fig3,[{'label': x, 'value': x} for x in pd.unique(dataset.sport)], fig
+    return fig1, fig2, fig3,[{'label': x, 'value': x} for x in pd.unique(df.Type_sport)], fig

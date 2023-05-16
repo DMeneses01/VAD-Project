@@ -68,7 +68,100 @@ athlete_results["medal"] = athlete_results["medal"].notnull().mul(1)
 
 athlete_results = athlete_results.merge(country_n, on='country_noc', how='left')
 
-gr = pd.DataFrame(athlete_results.groupby(['country', 'sport', 'edition', 'event']).sum()).reset_index()
+athlete_results["Type_sport"] = [""] * len(athlete_results)
+
+athlete_results.loc[athlete_results['sport'].str.contains("Athletics"), "Type_sport"] = "Athletics"
+athlete_results.loc[athlete_results['sport'].str.contains("Boxing"), "Type_sport"] = "Fight"
+athlete_results.loc[athlete_results['sport'].str.contains("Diving"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Rugby"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Shooting"), "Type_sport"] = "Shooting"
+athlete_results.loc[athlete_results['sport'].str.contains("Swimming"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Rowing"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Tennis"), "Type_sport"] = "Rackets"
+athlete_results.loc[athlete_results['sport'].str.contains("Artistic Gymnastics"), "Type_sport"] = "Gymnastics"
+athlete_results.loc[athlete_results['sport'].str.contains("Cycling Track"), "Type_sport"] = "Cycling"
+athlete_results.loc[athlete_results['sport'].str.contains("Fencing"), "Type_sport"] = "Fight"
+athlete_results.loc[athlete_results['sport'].str.contains("Wrestling"), "Type_sport"] = "Fight"
+athlete_results.loc[athlete_results['sport'].str.contains("Cycling Road"), "Type_sport"] = "Cycling"
+athlete_results.loc[athlete_results['sport'].str.contains("Artistic Swimming"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Judo"), "Type_sport"] = "Fight"
+athlete_results.loc[athlete_results['sport'].str.contains("Sailing"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Weightlifting"), "Type_sport"] = "Various"
+athlete_results.loc[athlete_results['sport'].str.contains("Taekwondo"), "Type_sport"] = "Fight"
+athlete_results.loc[athlete_results['sport'].str.contains("Archery"), "Type_sport"] = "Shooting"
+athlete_results.loc[athlete_results['sport'].str.contains("Golf"), "Type_sport"] = "Golf"
+athlete_results.loc[athlete_results['sport'].str.contains("Canoe Sprint"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Cycling Mountain Bike"), "Type_sport"] = "Cycling"
+athlete_results.loc[athlete_results['sport'].str.contains("Modern Pentathlon"), "Type_sport"] = "Various"
+athlete_results.loc[athlete_results['sport'].str.contains("Handball"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Basketball"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Roller Hockey"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Beach Volleyball"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Triathlon"), "Type_sport"] = "Various"
+athlete_results.loc[athlete_results['sport'].str.contains("Hockey"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Football"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Badminton"), "Type_sport"] = "Rackets"
+athlete_results.loc[athlete_results['sport'].str.contains("Wushu"), "Type_sport"] = "Fight"
+athlete_results.loc[athlete_results['sport'].str.contains("Rhythmic Gymnastics"), "Type_sport"] = "Gymnastics"
+athlete_results.loc[athlete_results['sport'].str.contains("Equestrian Jumping"), "Type_sport"] = "Equestrian"
+athlete_results.loc[athlete_results['sport'].str.contains("Canoe Slalom"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Karate"), "Type_sport"] = "Fight"
+athlete_results.loc[athlete_results['sport'].str.contains("Table Tennis"), "Type_sport"] = "Rackets"
+athlete_results.loc[athlete_results['sport'].str.contains("Volleyball"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Trampolining"), "Type_sport"] = "Gymnastics"
+athlete_results.loc[athlete_results['sport'].str.contains("Marathon Swimming"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Equestrian Eventing"), "Type_sport"] = "Equestrian"
+athlete_results.loc[athlete_results['sport'].str.contains("Equestrian Dressage"), "Type_sport"] = "Equestrian"
+athlete_results.loc[athlete_results['sport'].str.contains("Cycling BMX Freestyle"), "Type_sport"] = "Cycling"
+athlete_results.loc[athlete_results['sport'].str.contains("Surfing"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Water Polo"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Baseball"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Cycling BMX Racing"), "Type_sport"] = "Cycling"
+athlete_results.loc[athlete_results['sport'].str.contains("Waterskiing"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Rugby Sevens"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Skateboarding"), "Type_sport"] = "Skateboarding"
+athlete_results.loc[athlete_results['sport'].str.contains("Bowling"), "Type_sport"] = "Various"
+athlete_results.loc[athlete_results['sport'].str.contains("Softball"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Sport Climbing"), "Type_sport"] = "Mountain"
+athlete_results.loc[athlete_results['sport'].str.contains("Basque pelota"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Figure Skating"), "Type_sport"] = "Gymnastics"
+athlete_results.loc[athlete_results['sport'].str.contains("Polo"), "Type_sport"] = "Equestrian"
+athlete_results.loc[athlete_results['sport'].str.contains("Gliding"), "Type_sport"] = "Air"
+athlete_results.loc[athlete_results['sport'].str.contains("Automobile Racing"), "Type_sport"] = "Motors"
+athlete_results.loc[athlete_results['sport'].str.contains("Equestrian Driving"), "Type_sport"] = "Equestrian"
+athlete_results.loc[athlete_results['sport'].str.contains("Equestrian Vaulting"), "Type_sport"] = "Equestrian"
+athlete_results.loc[athlete_results['sport'].str.contains("Ice Hockey"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Tug-Of-War"), "Type_sport"] = "Various"
+athlete_results.loc[athlete_results['sport'].str.contains("Savate"), "Type_sport"] = "Fight"
+athlete_results.loc[athlete_results['sport'].str.contains("Canoe Marathon"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("3x3 Basketball"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Glíma"), "Type_sport"] = "Fight"
+athlete_results.loc[athlete_results['sport'].str.contains("Australian Rules Football"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Pesäpallo"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Lacrosse"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Bicycle Polo"), "Type_sport"] = "Cycling"
+athlete_results.loc[athlete_results['sport'].str.contains("Alpinism"), "Type_sport"] = "Mountain"
+athlete_results.loc[athlete_results['sport'].str.contains("Kendo"), "Type_sport"] = "Fight"
+athlete_results.loc[athlete_results['sport'].str.contains("Ballooning"), "Type_sport"] = "Air"
+athlete_results.loc[athlete_results['sport'].str.contains("Cricket"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Croquet"), "Type_sport"] = "Golf"
+athlete_results.loc[athlete_results['sport'].str.contains("Fishing"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Motorcycle Sports"), "Type_sport"] = "Motors"
+athlete_results.loc[athlete_results['sport'].str.contains("Motorboating"), "Type_sport"] = "Aquatic"
+athlete_results.loc[athlete_results['sport'].str.contains("Canne De Combat"), "Type_sport"] = "Fight"
+athlete_results.loc[athlete_results['sport'].str.contains("Jeu De Paume"), "Type_sport"] = "Rackets"
+athlete_results.loc[athlete_results['sport'].str.contains("Racquets"), "Type_sport"] = "Rackets"
+athlete_results.loc[athlete_results['sport'].str.contains("Korfball"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Kaatsen"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Aeronautics"), "Type_sport"] = "Air"
+athlete_results.loc[athlete_results['sport'].str.contains("American Football"), "Type_sport"] = "Team sport with Ball"
+athlete_results.loc[athlete_results['sport'].str.contains("Roque"), "Type_sport"] = "Golf"
+
+athlete_results = athlete_results.loc[(athlete_results["Type_sport"] != "")]
+
+gr = pd.DataFrame(athlete_results.groupby(['country', 'Type_sport', 'edition', 'sport']).sum()).reset_index()
+
+gr.to_csv('../react_site/src/Dataframes/linechart_country.csv', index=False)
 
 countries = athlete_results['country'].drop_duplicates().sort_values()
 
@@ -111,18 +204,18 @@ def update_line_chart(country, sports):
     new_medal = []
     for i in range(len(dataset)):
         edition = dataset.loc[i, 'edition']
-        sport = dataset.loc[i, 'sport']
-        event = dataset.loc[i, 'event']
+        sport = dataset.loc[i, 'Type_sport']
+        event = dataset.loc[i, 'sport']
 
-        new_medal.append(dataset[(dataset['edition'] <= edition) & (dataset['sport'] == sport) & (dataset['event'] == event)]['medal'].sum())
+        new_medal.append(dataset[(dataset['edition'] <= edition) & (dataset['Type_sport'] == sport) & (dataset['sport'] == event)]['medal'].sum())
 
     dataset['medal'] = new_medal
 
 
     df = dataset#px.data.gapminder()
-    mask = df.sport.isin(sports)
+    mask = df.Type_sport.isin(sports)
     fig = px.line(df[mask], 
-        x="edition", y="medal", color='event').update_layout({
+        x="edition", y="medal", color='sport').update_layout({
                                                     'plot_bgcolor': '#FFFFFF',
                                                     'paper_bgcolor': '#EEF1FA'
                                                     }, font_family= 'Cabin'
@@ -131,7 +224,7 @@ def update_line_chart(country, sports):
     fig.update_yaxes(showline=True, linewidth=2, gridcolor='#c7c7c7')
 
 
-    return [{'label': x, 'value': x} for x in pd.unique(dataset.sport)], fig
+    return [{'label': x, 'value': x} for x in pd.unique(dataset.Type_sport)], fig
 
 
 

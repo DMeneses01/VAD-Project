@@ -48,7 +48,7 @@ layout = html.Div(
                         ], style= {'position': 'absolute', 'width': '10vw', 'height': '5vh', 'left': '7.5vw', 'top': '90vh',
                                     'background': '#FFFFFF', 'boxShadow': '0px 4px 10px rgba(0, 0, 0, 0.2)', 'borderRadius': '12px'}
 				    ), 
-				    html.Img(src=pil_seta, style={'position': 'absolute', 'width': '2vw', 'height': '3.5vh', 'left': '15vw', 'top': '90.7vh'})     
+				    html.Img(src=pil_seta, style={'position': 'absolute', 'width': '1.5vw', 'height': '3vh', 'left': '15vw', 'top': '90.9vh'})     
                 ]
         ),
 	
