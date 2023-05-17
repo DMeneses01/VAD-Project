@@ -10,10 +10,10 @@ import os
 app = Dash(__name__)
 
 
-countries = gpd.read_file(os.path.join(os.path.dirname(os.getcwd()), 'Dataset', 'countries.geojson'))
+countries = gpd.read_file('../Dataset/countries.geojson')
 
 
-games_Medal = pd.read_csv(os.path.join(os.path.dirname(os.getcwd()), 'Dataset', 'Olympic_Games_Medal_Tally.csv'), sep=',', encoding_errors='replace')
+games_Medal = pd.read_csv('../Dataset/Olympic_Games_Medal_Tally.csv', sep=',', encoding_errors='replace')
 games_Medal = games_Medal.replace(["na"], None)
 
 games_Medal = games_Medal[games_Medal["edition"].str.contains("Winter") == False]
@@ -59,7 +59,7 @@ df.loc[df['country'] == "Russian Federation", ['total']] += df.loc[df['country']
 df = df[df["country"].str.contains("ROC")==False]
 
 Path = os.path.dirname(os.getcwd())
-df.to_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','heatmap.csv'), index=False)
+df.to_csv('../react_site/src/Dataframes/heatmap.csv', index=False)
 
 
 colors = ['#D6AF36', '#A7A7AD', '#A77044']

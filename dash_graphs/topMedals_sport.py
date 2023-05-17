@@ -9,7 +9,7 @@ from dash import Dash
 
 Path = os.getcwd()
 
-athlete_Event_Results = pd.read_csv(os.path.join(Path,'Dataset', 'Olympic_Athlete_Event_Results.csv'), sep=',')
+athlete_Event_Results = pd.read_csv('Dataset/Olympic_Athlete_Event_Results.csv', sep=',')
 athlete_Event_Results = athlete_Event_Results.replace(["na"], None)
 athlete_results = athlete_Event_Results[athlete_Event_Results["edition"].str.contains("Winter") == False]   # apenas jogos de verao
 
@@ -56,7 +56,7 @@ while(i < len(athlete_results)):
 
 athlete_results.drop(repeat, inplace=True)
 
-athlete_results.to_csv(os.path.join(Path, 'react_site', 'src', 'Dataframes','topMedals_sport.csv'), index=False)
+athlete_results.to_csv('../react_site/src/Dataframes/topMedals_sport.csv', index=False)
 
 sport = athlete_results["sport"].drop_duplicates().sort_values()
 
